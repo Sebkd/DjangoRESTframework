@@ -9,5 +9,6 @@ class AuthorModelSerializer(HyperlinkedModelSerializer):
             'username',
             'first_name',
             'last_name',
+            'birthday_year',
             'email',
         )
