@@ -4,6 +4,9 @@ import React from "react";
 import AuthorList from "./components/Author";
 import axios from 'axios'
 
+import SiderDemo from "./components/Menu_app";
+
+
 
 class App extends React.Component {
     constructor(props) {
@@ -24,9 +27,10 @@ class App extends React.Component {
                 )
             }).catch(error => console.log(error))
     }
-    
+
     render() {
         return (
+
             <div>
                 <AuthorList authors={this.state.authors}/>
             </div>
@@ -34,26 +38,5 @@ class App extends React.Component {
     }
 }
 
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;
