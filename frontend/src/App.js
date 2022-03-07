@@ -14,7 +14,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/api/authors')
+        axios.get('http://127.0.0.1:8000/api/authors/')
             .then(response => {
                 const authors = response.data
                 this.setState(
@@ -24,27 +24,7 @@ class App extends React.Component {
                 )
             }).catch(error => console.log(error))
     }
-
-    // componentDidMount() { // данный метод вызывается для того чтобы разместить компонент на странице
-    //     const authors = [
-    //         {
-    //             'first_name': 'Федор',
-    //             'last_name': 'Достоевский',
-    //             'birthday_year': 1821
-    //         },
-    //         {
-    //             'first_name': 'Александр',
-    //             'last_name': 'Пушкин',
-    //             'birthday_year': 1799
-    //         },
-    //     ]
-    //     this.setState( // записали в state
-    //         {
-    //             authors: authors
-    //         }
-    //     )
-    // }
-
+    
     render() {
         return (
             <div>
