@@ -2,6 +2,7 @@ from uuid import uuid4
 
 from django.db import models
 
+
 class Author(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid4)
     username = models.CharField(max_length=64)
@@ -11,24 +12,24 @@ class Author(models.Model):
     email = models.EmailField(unique=True)
 
     def __str__(self):
-        return self.username
+        return self.first_name + ' ' + self.last_name
+
 
 class Biography(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid4)
     text = models.TextField()
     author = models.OneToOneField(Author, on_delete=models.CASCADE)
 
+
 class Book(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=32)
-    author = models.ManyToManyField(Author)
+    authors = models.ManyToManyField(Author)
+
 
 class Article(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=32)
     author = models.ForeignKey(Author, models.PROTECT)
-
-
-
 
 # Create your models here.

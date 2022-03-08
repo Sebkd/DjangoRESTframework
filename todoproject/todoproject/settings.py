@@ -129,4 +129,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer', # отвечает за разрисовку в JSON
+        'rest_framework.renderers.BrowsableAPIRenderer', # преобразует данные для удобной работы с API в брауезере
+    ]
+}
