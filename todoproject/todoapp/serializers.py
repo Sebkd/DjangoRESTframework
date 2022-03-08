@@ -4,6 +4,11 @@ from authors.serializers import SimpleAuthorModelSerializer
 from todoapp.models import Project, ToDo
 
 
+class SimpleProjectModelSerializer(HyperlinkedModelSerializer):
+    class Meta:
+        model = Project
+        fields = 'name'
+
 class ProjectModelSerializer(HyperlinkedModelSerializer):
     authors = SimpleAuthorModelSerializer(many=True)
 
@@ -14,6 +19,7 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
 
 class ToDoModelSerializer(HyperlinkedModelSerializer):
     author = SimpleAuthorModelSerializer()
+    project = SimpleProjectModelSerializer()
 
     class Meta:
         model = ToDo

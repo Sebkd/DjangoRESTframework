@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from authors.views import AuthorModelViewSet, ArticleModelViewSet, BookModelViewSet, BiographyModelViewSet
+from todoapp.views import ProjectModelViewSet, ToDoModelViewSet
 
 router = DefaultRouter()  # определяем роутер
 router.register('authors',
@@ -26,6 +27,11 @@ router.register('biography',
 router.register('book', BookModelViewSet)  # регистрируем роутер за book и определяем что он сам сделаем все пути
 router.register('article',
                 ArticleModelViewSet)  # регистрируем роутер за article и определяем что он сам сделаем все пути
+
+router.register('project',
+                ProjectModelViewSet)
+router.register('todo',
+                ToDoModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

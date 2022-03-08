@@ -11,4 +11,4 @@ class ProjectModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
 
 class ToDoModelViewSet(ModelViewSet):
     queryset = ToDo.objects.all()
-    serializer_class = ToDoModelSerializer 
+    serializer_class = ToDoModelSerializer
