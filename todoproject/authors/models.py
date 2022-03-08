@@ -10,6 +10,9 @@ class Author(models.Model):
     birthday_year = models.PositiveIntegerField()
     email = models.EmailField(unique=True)
 
+    def __str__(self):
+        return self.username
+
 class Biography(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid4)
     text = models.TextField()
