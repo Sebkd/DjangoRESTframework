@@ -31,5 +31,3 @@ class Article(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=32)
     author = models.ForeignKey(Author, models.PROTECT)
-
-# Create your models here.

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'authors',
+    'todoapp'
     'corsheaders',
     'rest_framework',
 
