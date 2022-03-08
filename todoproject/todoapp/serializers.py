@@ -10,7 +10,7 @@ class SimpleProjectModelSerializer(HyperlinkedModelSerializer):
         fields = 'name'
 
 class ProjectModelSerializer(HyperlinkedModelSerializer):
-    authors = SimpleAuthorModelSerializer(many=True)
+    # authors = SimpleAuthorModelSerializer(many=True)
 
     class Meta:
         model = Project
@@ -18,8 +18,8 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
 
 
 class ToDoModelSerializer(HyperlinkedModelSerializer):
-    author = SimpleAuthorModelSerializer()
-    project = SimpleProjectModelSerializer()
+    # author = SimpleAuthorModelSerializer()
+    # project = SimpleProjectModelSerializer()
 
     class Meta:
         model = ToDo
