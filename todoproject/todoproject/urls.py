@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from authors.views import AuthorModelViewSet
-
+from authors.views import AuthorModelViewSet, ArticleModelViewSet, BookModelViewSet, BiographyModelViewSet
 
 router = DefaultRouter() # определяем роутер
 router.register('authors', AuthorModelViewSet) #регистрируем роутер за authors и определяем что он сам сделаем все пути
+router.register('biography', BiographyModelViewSet) #регистрируем роутер за biography и определяем что он сам сделаем все пути
+router.register('book', BookModelViewSet) #регистрируем роутер за book и определяем что он сам сделаем все пути
+router.register('article', ArticleModelViewSet) #регистрируем роутер за article и определяем что он сам сделаем все пути
 
 urlpatterns = [
     path('admin/', admin.site.urls),
