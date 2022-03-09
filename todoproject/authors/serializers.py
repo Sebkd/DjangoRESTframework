@@ -6,6 +6,11 @@ from .models import Author, Article, Biography, Book
 
 
 # HyperlinkedModelSerializer
+class SmallAuthorModelSerializer(ModelSerializer): # для APIView
+    class Meta:
+        model = Author
+        fields = ['first_name', 'last_name', ]
+
 
 class SimpleAuthorModelSerializer(HyperlinkedModelSerializer):
     class Meta:
