@@ -22,11 +22,11 @@ from todoapp.views import ProjectModelViewSet, ToDoModelViewSet
 router = DefaultRouter()  # определяем роутер
 router.register('authors',
                 AuthorModelViewSet)  # регистрируем роутер за authors и определяем что он сам сделаем все пути
-router.register('biography',
-                BiographyModelViewSet)  # регистрируем роутер за biography и определяем что он сам сделаем все пути
-router.register('book', BookModelViewSet)  # регистрируем роутер за book и определяем что он сам сделаем все пути
-router.register('article',
-                ArticleModelViewSet)  # регистрируем роутер за article и определяем что он сам сделаем все пути
+# router.register('biography',
+#                 BiographyModelViewSet)  # регистрируем роутер за biography и определяем что он сам сделаем все пути
+# router.register('book', BookModelViewSet)  # регистрируем роутер за book и определяем что он сам сделаем все пути
+# router.register('article',
+#                 ArticleModelViewSet)  # регистрируем роутер за article и определяем что он сам сделаем все пути
 
 router.register('project',
                 ProjectModelViewSet)
