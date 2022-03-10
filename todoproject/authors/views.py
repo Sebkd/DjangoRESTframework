@@ -84,6 +84,14 @@ class AuthorModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
     # renderer_classes = [JSONRenderer, BrowsableAPIRenderer] # если нужно для одного контроллера
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
+    # serializer_class = SmallAuthorModelSerializer # для поиска через url (kwarg)
+    filterset_fields = ['first_name', 'last_name']
+
+    # def get_queryset(self):# переопределение метода
+    #     param = self.request.headers.get('param') # для поиска через ?param
+    #     newparam = self.kwargs['newparam'] # для поиска через url (kwarg)
+    #     # return Author.objects.filter(first_name__contains=param)
+    #     return Author.objects.filter(first_name__contains=newparam) # для поиска через url (kwarg)
 
 
 class BookModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD

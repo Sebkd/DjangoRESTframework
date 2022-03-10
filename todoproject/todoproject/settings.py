@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
 
+    'django_filters', # нету в методичке
+
 ]
 
 MIDDLEWARE = [
@@ -134,5 +136,7 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer', # отвечает за разрисовку в JSON
         'rest_framework.renderers.BrowsableAPIRenderer', # преобразует данные для удобной работы с API в брауезере
-    ]
+        # 'rest_framework.renderers.AdminRenderer', # для выхода в API
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }

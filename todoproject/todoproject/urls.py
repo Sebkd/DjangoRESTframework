@@ -46,4 +46,5 @@ urlpatterns = [
     path('api/', include(router.urls)),  # собственно он сам далее после api/ пропишет все пути по CRUD
     # path('apiview/', AuthorApiView.as_view()), # просто посмотреть APIView
     # path('apilistview/', AuthorListApiView.as_view()), # просто посмотреть AuthorListApiView
+    # path('author/<str:newparam>/', AuthorModelViewSet.as_view({'get': 'list'})), # просто посмотреть get_queryset с kwarg
 ]
