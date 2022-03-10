@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from authors.views import AuthorModelViewSet, ArticleModelViewSet, BookModelViewSet, BiographyModelViewSet, \
-    AuthorApiView, AuthorListApiView
+from authors.views import AuthorModelViewSet, ArticleModelViewSet, BookModelViewSet, BiographyModelViewSet
+# from authors.views import AuthorApiView, AuthorListApiView, AuthorApiViewSet, AuthorApiModelViewSet
 from todoapp.views import ProjectModelViewSet, ToDoModelViewSet
 
 router = DefaultRouter()  # определяем роутер
@@ -34,10 +34,16 @@ router.register('project',
 router.register('todo',
                 ToDoModelViewSet)
 
+# router.register('testviewset', # просто посмотреть AuthorApiViewSet
+#                 AuthorApiViewSet, basename='api') # viewset не может генерировать basename поэтому его нужно вручную
+#
+# router.register('testmodelviewset',
+#                 AuthorApiModelViewSet)  # просто посмотреть AuthorApiModelViewSet
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),  # собственно он сам далее после api/ пропишет все пути по CRUD
-    path('apiview/', AuthorApiView.as_view()), # просто посмотреть APIView
-    path('apilistview/', AuthorListApiView.as_view()), # просто посмотреть AuthorListApiView
+    # path('apiview/', AuthorApiView.as_view()), # просто посмотреть APIView
+    # path('apilistview/', AuthorListApiView.as_view()), # просто посмотреть AuthorListApiView
 ]
