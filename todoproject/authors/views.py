@@ -6,6 +6,7 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.generics import CreateAPIView, ListAPIView
 
 from rest_framework import mixins
+from .filters import AuthorFilter
 
 from .models import Author, Book, Biography, Article
 from .serializers import AuthorModelSerializer, BookModelSerializer, BiographyModelSerializer, ArticleModelSerializer, \
@@ -81,11 +82,13 @@ from rest_framework.parsers import JSONParser
 
 
 class AuthorModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
+    # username = filters.CharFilter(lookup_expr='contains')
     # renderer_classes = [JSONRenderer, BrowsableAPIRenderer] # если нужно для одного контроллера
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
+    filterset_class = AuthorFilter
     # serializer_class = SmallAuthorModelSerializer # для поиска через url (kwarg)
-    filterset_fields = ['first_name', 'last_name']
+    # filterset_fields = ['username']
 
     # def get_queryset(self):# переопределение метода
     #     param = self.request.headers.get('param') # для поиска через ?param
