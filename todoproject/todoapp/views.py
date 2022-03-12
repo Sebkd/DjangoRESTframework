@@ -39,7 +39,6 @@ class ToDoModelViewSet(ModelViewSet):
         instance.save()
 
 
-
 class ToDoCustomFilterModelViewSet(ModelViewSet):  # используем filters
     queryset = ToDo.objects.all()
     serializer_class = ToDoModelSerializer

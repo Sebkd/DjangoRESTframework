@@ -82,12 +82,12 @@ from rest_framework.parsers import JSONParser
 #     return Response(serializer.data)
 
 class AuthorCustomMixinViewSet(
-                   # mixins.CreateModelMixin,
-                   mixins.RetrieveModelMixin,
-                   mixins.UpdateModelMixin,
-                   # mixins.DestroyModelMixin,
-                   mixins.ListModelMixin,
-                   GenericViewSet):
+    # mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    # mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    GenericViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
     filterset_class = AuthorFilter

@@ -9,6 +9,7 @@ class SimpleProjectModelSerializer(HyperlinkedModelSerializer):
         model = Project
         fields = 'name'
 
+
 class ProjectModelSerializer(HyperlinkedModelSerializer):
     # authors = SimpleAuthorModelSerializer(many=True)
 
