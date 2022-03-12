@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -14,6 +14,7 @@ from .serializers import AuthorModelSerializer, BookModelSerializer, BiographyMo
 
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer, StaticHTMLRenderer
 from rest_framework.parsers import JSONParser
+
 
 #
 # class AuthorApimixin(mixins.CreateModelMixin,
@@ -87,6 +88,7 @@ class AuthorModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
     filterset_class = AuthorFilter
+
     # serializer_class = SmallAuthorModelSerializer # для поиска через url (kwarg)
     # filterset_fields = ['username']
 
@@ -95,6 +97,12 @@ class AuthorModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
     #     newparam = self.kwargs['newparam'] # для поиска через url (kwarg)
     #     # return Author.objects.filter(first_name__contains=param)
     #     return Author.objects.filter(first_name__contains=newparam) # для поиска через url (kwarg)
+
+    def destroy(self, request, *args, **kwargs):  # переопределения метода удаления
+        return Response({'forbidden': 'Запрещено удалять'}, status=status.HTTP_403_FORBIDDEN)
+
+    def create(self, request, *args, **kwargs):  # переопределения метода удаления
+        return Response({'forbidden': 'Запрещено добавлять'}, status=status.HTTP_403_FORBIDDEN)
 
 
 class BookModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
