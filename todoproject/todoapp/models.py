@@ -24,7 +24,7 @@ class ToDo(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid4)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)  # жестко привязываем к проекту
     content = models.TextField(blank=True)
-    is_created = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) # дата создания
+    is_created = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))  # дата создания
     is_change = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(Author, on_delete=models.PROTECT)  # даже при удалении автора заметка останется
     is_active = models.BooleanField(default=True, auto_created=True)

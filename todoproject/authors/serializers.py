@@ -3,9 +3,12 @@ from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializ
 from .models import Author, Article, Biography, Book
 
 
-
-
 # HyperlinkedModelSerializer
+class SmallAuthorModelSerializer(ModelSerializer):  # для APIView
+    class Meta:
+        model = Author
+        fields = ['first_name', 'last_name', ]
+
 
 class SimpleAuthorModelSerializer(HyperlinkedModelSerializer):
     class Meta:
@@ -31,6 +34,7 @@ class BiographyModelSerializer(HyperlinkedModelSerializer):
 class BookModelSerializer(ModelSerializer):
     # authors = SimpleAuthorModelSerializer(many=True)
     authors = StringRelatedField(many=True)
+
     # authors = AuthorModelSerializer(many=True)
 
     class Meta:
