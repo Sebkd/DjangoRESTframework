@@ -81,6 +81,17 @@ from rest_framework.parsers import JSONParser
 #     serializer = ArticleSerializer(articles, many=True)
 #     return Response(serializer.data)
 
+class AuthorCustomMixinViewSet(
+                   # mixins.CreateModelMixin,
+                   mixins.RetrieveModelMixin,
+                   mixins.UpdateModelMixin,
+                   # mixins.DestroyModelMixin,
+                   mixins.ListModelMixin,
+                   GenericViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
+    filterset_class = AuthorFilter
+
 
 class AuthorModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
     # username = filters.CharFilter(lookup_expr='contains')
