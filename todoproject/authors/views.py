@@ -6,7 +6,7 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.generics import CreateAPIView, ListAPIView
 
 from rest_framework import mixins
-from .filters import AuthorFilter
+from .filters import AuthorFilter, BookFilter
 
 from .models import Author, Book, Biography, Article
 from .serializers import AuthorModelSerializer, BookModelSerializer, BiographyModelSerializer, ArticleModelSerializer, \
@@ -119,7 +119,7 @@ class AuthorModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
 class BookModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
     queryset = Book.objects.all()
     serializer_class = BookModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
-
+    filterset_class = BookFilter
 
 class ArticleModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
     queryset = Article.objects.all()
