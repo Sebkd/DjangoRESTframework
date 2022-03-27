@@ -1,15 +1,15 @@
-from rest_framework.relations import SlugRelatedField
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.relations import SlugRelatedField, StringRelatedField
+from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
 
 from authors.models import Author
-from authors.serializers import SimpleAuthorModelSerializer
+from authors.serializers import SimpleAuthorModelSerializer, AuthorModelSerializer, AuthorStringRelatedField
 from todoapp.models import Project, ToDo
 
 
 class SimpleProjectModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = 'name'
+        fields = ['name',]
 
 
 class ProjectModelSerializer(HyperlinkedModelSerializer):
@@ -21,9 +21,14 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
         fields = '__all__'
 
 
+class ProjectStringRelatedField(StringRelatedField):
+    class Meta:
+        model = Project
+
+
 class ToDoModelSerializer(HyperlinkedModelSerializer):
-    # author = SimpleAuthorModelSerializer()
-    # project = SimpleProjectModelSerializer()
+    author = AuthorStringRelatedField()
+    project = ProjectStringRelatedField()
 
     class Meta:
         model = ToDo

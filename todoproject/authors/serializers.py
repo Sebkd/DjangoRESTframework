@@ -17,11 +17,16 @@ class SimpleAuthorModelSerializer(HyperlinkedModelSerializer):
         fields = ['first_name', 'last_name', ]
 
 
-class AuthorModelSerializer(HyperlinkedModelSerializer):
+class AuthorModelSerializer(ModelSerializer):
     class Meta:
         model = Author
         # exclude = ['url']
-        fields = '__all__'
+        fields = ['username',]
+
+
+class AuthorStringRelatedField(StringRelatedField):
+    class Meta:
+        model = Author
 
 
 class BiographyModelSerializer(HyperlinkedModelSerializer):

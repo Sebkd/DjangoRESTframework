@@ -14,10 +14,10 @@ const ProjectList = ({projects}) => {
     return (
         <table>
             <tr>
-                <th>UID</th>
+                {/*<th>UID</th>*/}
                 <th>NAME</th>
                 <th>LINK</th>
-                <th>AUHTORS</th>
+                <th>AUTHORS</th>
             </tr>
             {projects.map((project) => <ProjectItem project={project}/>)}
         </table>
