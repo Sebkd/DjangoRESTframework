@@ -10,7 +10,8 @@ import {
 
 
 import App from "../App";
-import {Link, Route} from "react-router-dom";
+import {Link, Route, Router, Routes} from "react-router-dom";
+import AuthorList from "./Author";
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu;
@@ -28,16 +29,21 @@ class SiderDemo extends React.Component {
     render() {
         const {collapsed} = this.state;
         return (
+
             <Layout style={{minHeight: '100vh'}}>
                 <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
                     <div className="logo"/>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+
                         <Menu.Item key="1" icon={<PieChartOutlined/>}>
-                            Authors
+                           Authors
+
                         </Menu.Item>
                         <Menu.Item key="2" icon={<DesktopOutlined/>}>
                             Books
+
                         </Menu.Item>
+
                         <SubMenu key="sub1" icon={<UserOutlined/>} title="User">
                             <Menu.Item key="3">Tom</Menu.Item>
                             <Menu.Item key="4">Bill</Menu.Item>
@@ -61,6 +67,7 @@ class SiderDemo extends React.Component {
                     <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
             </Layout>
+
         );
     }
 }

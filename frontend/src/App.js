@@ -11,14 +11,12 @@ import axios from 'axios'
 import {HashRouter, Route, Link, Routes, useLocation, Redirect} from 'react-router-dom'
 
 
-
 const NotFound404 = () => {
-    let navigation = useLocation();
 
     return (
         <div>
             <h1>
-                Not Found `{navigation.pathname}`
+                Page Not Found
                 {/*из location.pathname можно взять глобальный путь урла*/}
             </h1>
         </div>
@@ -62,12 +60,14 @@ class App extends React.Component {
             <div className="App">
                 <HashRouter>
                     <Routes>
-                            <Route path='/' element={<AuthorList authors={this.state.authors}/>}/>
-                            {/* в старом варианте выглядело так  */}
-                            {/*<Route exact path='/' component={() => <AuthorList authors={this.state.authors}/>}/>*/}
-                            {/*и не оборачивали в Routes*/}
-                            {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
-                            <Route path='/books' element={<BookList books={this.state.books}/>}/>
+                        <Route path='*' element={<NotFound404/>}/>
+
+                        <Route path='/' element={<AuthorList authors={this.state.authors}/>}/>
+                        {/* в старом варианте выглядело так  */}
+                        {/*<Route exact path='/' component={() => <AuthorList authors={this.state.authors}/>}/>*/}
+                        {/*и не оборачивали в Routes*/}
+                        {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
+                        <Route path='/books' element={<BookList books={this.state.books}/>}/>
 
                         <Route path='/author/:username' element={<AuthorBookList items={this.state.books}/>}/>
 

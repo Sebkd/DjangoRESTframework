@@ -12,16 +12,11 @@ const BookItem = ({item}) => {
 }
 const AuthorBookList = ({items}) => {
     let {username} = useParams();
-    // let filtered_items = items.filter((item) => item.authors.username === username)
-    // let filtered_items = items.forEach(function (item) {
-    //     item.authors.filter((elem) => elem == username)
-    // })
-    // let filtered_items = items.filter((item) => item.authors == username)
+    // когда авторов больше чем один
     let filtered_items = items.filter((item) => {for (let index = 0; index < item.authors.length; ++index)
-    { return item.authors[index] == username; }
+    { if (item.authors[index] === username) return 1}
     })
-    // let filtered_items = items.filter((item) => item.authors.forEach(function (elem)
-    // { return elem == username; }))
+
     return (
         <table>
             <tr>
