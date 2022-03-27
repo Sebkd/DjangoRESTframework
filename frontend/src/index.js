@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import SliderDemo from "./components/Menu_app";
+import {Router} from "react-router-dom";
 
 
 ReactDOM.render(
     <React.StrictMode>
+
     <SliderDemo/>
+
     </React.StrictMode>,
     document.getElementById('root')
 );

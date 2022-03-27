@@ -8,7 +8,8 @@ import AuthorBookList from "./components/AuthorBook";
 
 import axios from 'axios'
 
-import {HashRouter, Route, Link, Routes, useLocation, Redirect} from 'react-router-dom'
+import {HashRouter, Route, Link, Routes, useLocation, Redirect, BrowserRouter} from 'react-router-dom'
+import ProjectList from "./components/Project";
 
 
 const NotFound404 = () => {
@@ -30,6 +31,7 @@ class App extends React.Component {
         this.state = {
             'authors': [],
             'books': [],
+            'projects':[],
         }
     }
 
@@ -53,12 +55,22 @@ class App extends React.Component {
                     }
                 )
             }).catch(error => console.log(error))
+
+                axios.get('http://127.0.0.1:8000/api/project/')
+            .then(response => {
+                const items = response.data.results
+                this.setState(
+                    {
+                        'projects': items
+                    }
+                )
+            }).catch(error => console.log(error))
     }
 
     render() {
         return (
             <div className="App">
-                <HashRouter>
+                <BrowserRouter>
                     <Routes>
                         <Route path='*' element={<NotFound404/>}/>
 
@@ -68,11 +80,12 @@ class App extends React.Component {
                         {/*и не оборачивали в Routes*/}
                         {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
                         <Route path='/books' element={<BookList books={this.state.books}/>}/>
+                        <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>
 
                         <Route path='/author/:username' element={<AuthorBookList items={this.state.books}/>}/>
 
                     </Routes>
-                </HashRouter>
+                </BrowserRouter>
             </div>
         )
     }

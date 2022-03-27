@@ -35,10 +35,10 @@ class SiderDemo extends React.Component {
                     <div className="logo"/>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
 
-                        <Menu.Item key="1" icon={<PieChartOutlined/>}>
-                           Authors
-
+                        <Menu.Item key="1" icon={<PieChartOutlined/>} >
+                            Authors
                         </Menu.Item>
+
                         <Menu.Item key="2" icon={<DesktopOutlined/>}>
                             Books
 
