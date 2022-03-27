@@ -4,11 +4,26 @@ import React from "react";
 
 import AuthorList from "./components/Author";
 import BookList from "./components/Book"
+import AuthorBookList from "./components/AuthorBook";
 
 import axios from 'axios'
 
-import SiderDemo from "./components/Menu_app";
+import {HashRouter, Route, Link, Routes, useLocation, Redirect} from 'react-router-dom'
 
+
+
+const NotFound404 = () => {
+    let navigation = useLocation();
+
+    return (
+        <div>
+            <h1>
+                Not Found `{navigation.pathname}`
+                {/*из location.pathname можно взять глобальный путь урла*/}
+            </h1>
+        </div>
+    )
+}
 
 
 class App extends React.Component {
@@ -16,7 +31,7 @@ class App extends React.Component {
         super(props)
         this.state = {
             'authors': [],
-            'books' : [],
+            'books': [],
         }
     }
 
@@ -44,11 +59,20 @@ class App extends React.Component {
 
     render() {
         return (
-
             <div className="App">
-                {/*<AuthorList authors={this.state.authors}/>*/}
-                <AuthorList authors={this.state.authors}/>
-                <BookList books={this.state.books}/>
+                <HashRouter>
+                    <Routes>
+                            <Route path='/' element={<AuthorList authors={this.state.authors}/>}/>
+                            {/* в старом варианте выглядело так  */}
+                            {/*<Route exact path='/' component={() => <AuthorList authors={this.state.authors}/>}/>*/}
+                            {/*и не оборачивали в Routes*/}
+                            {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
+                            <Route path='/books' element={<BookList books={this.state.books}/>}/>
+
+                        <Route path='/author/:username' element={<AuthorBookList items={this.state.books}/>}/>
+
+                    </Routes>
+                </HashRouter>
             </div>
         )
     }

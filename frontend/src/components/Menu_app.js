@@ -7,7 +7,10 @@ import {
     TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
+
+
 import App from "../App";
+import {Link, Route} from "react-router-dom";
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu;
@@ -30,10 +33,10 @@ class SiderDemo extends React.Component {
                     <div className="logo"/>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1" icon={<PieChartOutlined/>}>
-                            Option 1
+                            Authors
                         </Menu.Item>
                         <Menu.Item key="2" icon={<DesktopOutlined/>}>
-                            Option 2
+                            Books
                         </Menu.Item>
                         <SubMenu key="sub1" icon={<UserOutlined/>} title="User">
                             <Menu.Item key="3">Tom</Menu.Item>

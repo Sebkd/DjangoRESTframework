@@ -1,42 +1,44 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const AuthorItem = ({author}) => {
     return (<tr>
         <td>
-            {author.username}
-        </td>
-        <td>
+            {/*{author.username}*/}
+            <Link to={`author/${author.username}`}> {author.username} </Link>
+                </td>
+                <td>
             {author.first_name}
-        </td>
-        <td>
+                </td>
+                <td>
             {author.last_name}
-        </td>
-        <td>
+                </td>
+                <td>
             {author.birthday_year}
-        </td>
-        <td>
+                </td>
+                <td>
             {author.email}
-        </td>
-    </tr>)
-}
-const AuthorList = ({authors}) => {
-    return (<table>
-        <th>
+                </td>
+                </tr>)
+            }
+            const AuthorList = ({authors}) => {
+            return (<table>
+            <th>
             Username
-        </th>
-        <th>
+            </th>
+            <th>
             First name
-        </th>
-        <th>
+            </th>
+            <th>
             Last Name
-        </th>
-        <th>
+            </th>
+            <th>
             Birthday year
-        </th>
-        <th>
+            </th>
+            <th>
             Email
-        </th>
+            </th>
         {authors.map((author) => <AuthorItem author={author}/>)}
-    </table>)
-}
-export default AuthorList
+            </table>)
+        }
+            export default AuthorList
