@@ -5,7 +5,8 @@ const ProjectItem = ({project}) => {
     return (
         <tr>
             {/*<td>{project.url}</td>*/}
-            <Link to={`project/${project.name.replace(/\s/g, '')}`}> {project.name} </Link>
+            <Link to={`/project/${project.name.replace(/\s/g, '')}`}> {project.name} </Link>
+
             {/*<td>{project.name}</td>*/}
             <td>{project.link}</td>
             <td>{project.authors.join(' & ')}</td>

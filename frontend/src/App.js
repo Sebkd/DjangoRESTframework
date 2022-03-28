@@ -98,7 +98,7 @@ class App extends React.Component {
 
                     <Route path='/author/:username' element={<AuthorBookList items={this.state.books}/>}/>
 
-                    <Route path="/:name.replace(/\s/g, '')" element={<ProjectToDoList items={this.state.todos}/>}/>
+                    <Route path="/project/:name" element={<ProjectToDoList items={this.state.todos}/>}/>
 
                 </Routes>
             </div>

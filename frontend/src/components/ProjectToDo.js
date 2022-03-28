@@ -13,8 +13,9 @@ const TodoItem = ({todo}) => {
 }
 const ProjectToDoList = ({items}) => {
     let {name} = useParams();
+    console.log(name)
     // когда авторов больше чем один
-    let filtered_items = items.filter((item) => item.project === name)
+    let filtered_items = items.filter((item) => item.project.replace(/\s/g, '') === name)
 
 
 
