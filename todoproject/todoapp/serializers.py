@@ -1,3 +1,5 @@
+from abc import ABC
+
 from rest_framework.relations import SlugRelatedField, StringRelatedField
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
 
@@ -21,15 +23,16 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class ProjectStringRelatedField(StringRelatedField):
+class ProjectStringRelatedField(StringRelatedField, ABC):
     class Meta:
         model = Project
 
 
-class ToDoModelSerializer(HyperlinkedModelSerializer):
+class ToDoModelSerializer(HyperlinkedModelSerializer):# work model HyperlinkedModelSerializer
     author = AuthorStringRelatedField()
     project = ProjectStringRelatedField()
 
     class Meta:
         model = ToDo
         fields = '__all__'
+

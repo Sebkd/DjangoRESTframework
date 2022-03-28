@@ -1,4 +1,5 @@
 import React from 'react'
+import {useParams} from 'react-router-dom'
 
 const TodoItem = ({todo}) => {
     return (
@@ -10,17 +11,23 @@ const TodoItem = ({todo}) => {
         </tr>
     )
 }
-const TodoList = ({todos}) => {
+const ProjectToDoList = ({items}) => {
+    let {name} = useParams();
+    // когда авторов больше чем один
+    let filtered_items = items.filter((item) => item.project === name)
+
+
+
     return (
         <table>
             <tr>
-                {/*<th>UID</th>*/}
+                {/*<th>ID</th>*/}
                 <th>PROJECT</th>
                 <th>AUTHOR</th>
                 <th>CONTENT</th>
             </tr>
-            {todos.map((todo) => <TodoItem todo={todo}/>)}
+            {filtered_items.map((item) => <TodoItem item={item}/>)}
         </table>
     )
 }
-export default TodoList
+export default ProjectToDoList;

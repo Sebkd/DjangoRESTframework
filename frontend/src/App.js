@@ -11,6 +11,7 @@ import axios from 'axios'
 import {HashRouter, Route, Link, Routes, useLocation, Redirect, BrowserRouter} from 'react-router-dom'
 import ProjectList from "./components/Project";
 import ToDoList from "./components/ToDo";
+import ProjectToDoList from "./components/ProjectToDo";
 
 
 const NotFound404 = () => {
@@ -33,7 +34,7 @@ class App extends React.Component {
             'authors': [],
             'books': [],
             'projects': [],
-            'todos' : [],
+            'todos': [],
         }
     }
 
@@ -83,23 +84,23 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <BrowserRouter>
-                    <Routes>
-                        <Route path='*' element={<NotFound404/>}/>
+                <Routes>
+                    <Route path='*' element={<NotFound404/>}/>
 
-                        <Route path='/' element={<AuthorList authors={this.state.authors}/>}/>
-                        {/* в старом варианте выглядело так  */}
-                        {/*<Route exact path='/' component={() => <AuthorList authors={this.state.authors}/>}/>*/}
-                        {/*и не оборачивали в Routes*/}
-                        {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
-                        <Route path='/books' element={<BookList books={this.state.books}/>}/>
-                        <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>
-                        <Route path='/todos' element={<ToDoList projects={this.state.todos}/>}/>
+                    <Route path='/' element={<AuthorList authors={this.state.authors}/>}/>
+                    {/* в старом варианте выглядело так  */}
+                    {/*<Route exact path='/' component={() => <AuthorList authors={this.state.authors}/>}/>*/}
+                    {/*и не оборачивали в Routes*/}
+                    {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
+                    <Route path='/books' element={<BookList books={this.state.books}/>}/>
+                    <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>
+                    <Route path='/todos' element={<ToDoList todos={this.state.todos}/>}/>
 
-                        <Route path='/author/:username' element={<AuthorBookList items={this.state.books}/>}/>
+                    <Route path='/author/:username' element={<AuthorBookList items={this.state.books}/>}/>
 
-                    </Routes>
-                </BrowserRouter>
+                    <Route path="/:name.replace(/\s/g, '')" element={<ProjectToDoList items={this.state.todos}/>}/>
+
+                </Routes>
             </div>
         )
     }

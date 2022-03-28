@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import SliderDemo from "./components/Menu_app";
-import {Router} from "react-router-dom";
+import {BrowserRouter, Router, Routes} from "react-router-dom";
+
+import Menu_App from "./Menu_app";
 
 
 ReactDOM.render(
     <React.StrictMode>
 
-    <SliderDemo/>
+    <Menu_App />
 
     </React.StrictMode>,
     document.getElementById('root')

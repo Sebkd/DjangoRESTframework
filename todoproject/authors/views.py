@@ -81,7 +81,7 @@ from rest_framework.parsers import JSONParser
 #     serializer = ArticleSerializer(articles, many=True)
 #     return Response(serializer.data)
 
-class AuthorCustomMixinViewSet(
+class AuthorCustomMixinViewSet( #work model
     # mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
