@@ -12,7 +12,8 @@ class Author(models.Model):
     email = models.EmailField(unique=True)
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        # return self.first_name + ' ' + self.last_name
+        return self.username
 
 
 class Biography(models.Model):

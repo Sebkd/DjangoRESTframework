@@ -15,7 +15,7 @@ class ToDoLimitOffsetPagination(LimitOffsetPagination):
     default_limit = 20
 
 
-class ProjectModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
+class ProjectModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD Work model
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
     pagination_class = ProjectLimitOffsetPagination
@@ -28,7 +28,7 @@ class ProjectModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
 #     filterset_class = ProjectFilter
 
 
-class ToDoModelViewSet(ModelViewSet):
+class ToDoModelViewSet(ModelViewSet):#work model
     queryset = ToDo.objects.all()
     serializer_class = ToDoModelSerializer
     pagination_class = ToDoLimitOffsetPagination
