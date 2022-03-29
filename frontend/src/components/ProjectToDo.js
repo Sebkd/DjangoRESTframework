@@ -15,7 +15,15 @@ const ProjectToDoList = ({items}) => {
     let {name} = useParams();
     console.log(name)
     // когда авторов больше чем один
-    let filtered_items = items.filter((item) => item.project.replace(/\s/g, '') === name)
+    // let filtered_items = items.filter((item) => item.project.replace(/\s/g, '') === name)
+    let filtered_items = items.filter(function (item) {
+        let projectname = item.project.replace(/\s/g, '')
+        console.log(name)
+        console.log(item.project)
+        console.log(projectname)
+        console.log(projectname == name)
+        if (projectname == name) return 1
+    })
 
 
 
@@ -27,7 +35,7 @@ const ProjectToDoList = ({items}) => {
                 <th>AUTHOR</th>
                 <th>CONTENT</th>
             </tr>
-            {filtered_items.map((item) => <TodoItem item={item}/>)}
+            {filtered_items.map((item) => <TodoItem todo={item}/>)}
         </table>
     )
 }
