@@ -22,6 +22,9 @@ from authors.views import AuthorModelViewSet, ArticleModelViewSet, BookModelView
 from todoapp.views import ProjectModelViewSet, ToDoModelViewSet, \
     ToDoCustomFilterModelViewSet
 
+from rest_framework.authtoken import views
+from rest_framework_jwt.views import obtain_jwt_token
+
 router = DefaultRouter()  # определяем роутер
 router.register('authors',
                 AuthorCustomMixinViewSet)  # регистрируем роутер за authors и определяем что он сам сделаем все пути
@@ -43,6 +46,9 @@ router.register('todo',
 #                 AuthorApiModelViewSet)  # просто посмотреть AuthorApiModelViewSet
 
 urlpatterns = [
+    path('api-token-auth/', views.obtain_auth_token),
+    path('api-tokenjwt-auth/', obtain_jwt_token),
+
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),  # собственно он сам далее после api/ пропишет все пути по CRUD
