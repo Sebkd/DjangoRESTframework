@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.generics import CreateAPIView, ListAPIView
 
+from rest_framework.permissions import IsAuthenticated
+
 from rest_framework import mixins
 from .filters import AuthorFilter, BookFilter
 
@@ -91,6 +93,7 @@ class AuthorCustomMixinViewSet( #work model
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
     filterset_class = AuthorFilter
+
 
 
 class AuthorModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD
