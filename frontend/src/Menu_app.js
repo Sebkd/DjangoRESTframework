@@ -6,6 +6,7 @@ import {
     FileOutlined,
     TeamOutlined,
     UserOutlined,
+    LoginOutLined,
 } from '@ant-design/icons';
 
 
@@ -58,6 +59,11 @@ class Menu_app extends React.Component {
                             {/*</SubMenu>*/}
                             <Menu.Item key="9" icon={<FileOutlined/>}>
                                 <Link to={'/todos'} >ToDo</Link>
+                            </Menu.Item>
+                            <Menu.Item key="10" icon={<LoginOutLined/>}>
+                                {
+                                    <Link to={'/login'} >Login</Link>
+                                }
                             </Menu.Item>
                         </Menu>
                     </Sider>

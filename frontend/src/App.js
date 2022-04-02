@@ -2,16 +2,17 @@
 import './App.css';
 import React from "react";
 
+import axios from 'axios'
+import Cookies from 'universal-cookie'
+import {HashRouter, Route, Link, Routes, useLocation, Redirect, BrowserRouter} from 'react-router-dom'
+
 import AuthorList from "./components/Author";
 import BookList from "./components/Book"
 import AuthorBookList from "./components/AuthorBook";
-
-import axios from 'axios'
-
-import {HashRouter, Route, Link, Routes, useLocation, Redirect, BrowserRouter} from 'react-router-dom'
 import ProjectList from "./components/Project";
 import ToDoList from "./components/ToDo";
 import ProjectToDoList from "./components/ProjectToDo";
+import LoginForm from "./components/Auth";
 
 
 const NotFound404 = () => {
@@ -35,10 +36,36 @@ class App extends React.Component {
             'books': [],
             'projects': [],
             'todos': [],
+            'token': '',
         }
     }
 
-    componentDidMount() {
+    set_token(token) {
+        let cookies = new Cookies();
+        cookies.set('token', token)
+        this.setState({'token': token}, () => this.load_data())
+    }
+
+    is_authenticated(){
+        return this.state.token !== ''
+    }
+
+    logout(){
+        this.set_token('')
+    }
+
+    get_token_from_storage(){
+        let cookies = new Cookies()
+        let token = cookies.get('token')
+        this.setState({'token': token}, () => this.load_data())
+    }
+
+    get_token(username, password)
+
+
+    load_data() {
+
+
         axios.get('http://127.0.0.1:8000/api/authors/')
             .then(response => {
                 const items = response.data.results
@@ -78,7 +105,10 @@ class App extends React.Component {
                     }
                 )
             }).catch(error => console.log(error))
+    }
 
+    componentDidMount() {
+        this.load_data()
     }
 
     render() {
@@ -99,6 +129,9 @@ class App extends React.Component {
                     <Route path='/author/:username' element={<AuthorBookList items={this.state.books}/>}/>
 
                     <Route path="/project/:name" element={<ProjectToDoList items={this.state.todos}/>}/>
+
+                    <Route path='/login' element={<LoginForm
+                        get_token={(username, password) => this.get_token(username, password)}/>}/>
 
                 </Routes>
             </div>
