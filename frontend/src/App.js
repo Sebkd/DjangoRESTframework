@@ -2,9 +2,19 @@
 import './App.css';
 import React from "react";
 
+import {Layout, Menu} from 'antd';
+import {
+    DesktopOutlined,
+    PieChartOutlined,
+    FileOutlined,
+    TeamOutlined,
+    UserOutlined,
+} from '@ant-design/icons';
+import {BrowserRouter, Link, Route, Router, Routes} from "react-router-dom";
+
 import axios from 'axios'
 import Cookies from 'universal-cookie'
-import {HashRouter, Route, Link, Routes, useLocation, Redirect, BrowserRouter} from 'react-router-dom'
+import {HashRouter, useLocation, Redirect,} from 'react-router-dom'
 
 import AuthorList from "./components/Author";
 import BookList from "./components/Book"
@@ -14,6 +24,9 @@ import ToDoList from "./components/ToDo";
 import ProjectToDoList from "./components/ProjectToDo";
 import LoginForm from "./components/Auth";
 
+
+const {Header, Content, Footer, Sider} = Layout;
+const {SubMenu} = Menu;
 
 const NotFound404 = () => {
 
@@ -37,8 +50,15 @@ class App extends React.Component {
             'projects': [],
             'todos': [],
             'token': '',
+            'user_name': '',
+            collapsed: false,
         }
     }
+
+    onCollapse = collapsed => {
+        console.log(collapsed);
+        this.setState({collapsed});
+    };
 
     set_token(token) {
         let cookies = new Cookies();
@@ -46,27 +66,55 @@ class App extends React.Component {
         this.setState({'token': token}, () => this.load_data())
     }
 
-    is_authenticated(){
-        return this.state.token !== ''
+
+    is_authenticated() {
+        return this.state.token != ''
     }
 
-    logout(){
+    logout() {
         this.set_token('')
     }
 
-    get_token_from_storage(){
+    get_token_from_storage() {
         let cookies = new Cookies()
         let token = cookies.get('token')
         this.setState({'token': token}, () => this.load_data())
     }
 
-    get_token(username, password)
+    get_token(username, password) {
+        axios.post('http://127.0.0.1:8000/api/api-token-auth/', {username: username, password: password})
+            .then(response => {
+                let token = response.data['token']
+                console.log(response.data.json)
+                this.set_token(token)
+                this.set_user_name(username)
+            }).catch(error => alert('Неверный логин или пароль'))
+    }
+
+    set_user_name(username){
+        this.state.username = username
+    }
+
+    get_user_name(){
+        return this.state.username
+    }
+
+    get_headers() {
+        let headers = {
+            'Content-Type': 'application/json'
+        }
+        if (this.is_authenticated()) {
+            headers['Authorization'] = 'Token ' + this.state.token
+        }
+        return headers
+    }
 
 
     load_data() {
 
+        let headers = this.get_headers()
 
-        axios.get('http://127.0.0.1:8000/api/authors/')
+        axios.get('http://127.0.0.1:8000/api/authors/', {headers})
             .then(response => {
                 const items = response.data.results
                 this.setState(
@@ -76,7 +124,7 @@ class App extends React.Component {
                 )
             }).catch(error => console.log(error))
 
-        axios.get('http://127.0.0.1:8000/api/book/')
+        axios.get('http://127.0.0.1:8000/api/book/', {headers})
             .then(response => {
                 const items = response.data.results
                 this.setState(
@@ -86,7 +134,7 @@ class App extends React.Component {
                 )
             }).catch(error => console.log(error))
 
-        axios.get('http://127.0.0.1:8000/api/project/')
+        axios.get('http://127.0.0.1:8000/api/project/', {headers})
             .then(response => {
                 const items = response.data.results
                 this.setState(
@@ -96,7 +144,7 @@ class App extends React.Component {
                 )
             }).catch(error => console.log(error))
 
-        axios.get('http://127.0.0.1:8000/api/todo/')
+        axios.get('http://127.0.0.1:8000/api/todo/', {headers})
             .then(response => {
                 const items = response.data.results
                 this.setState(
@@ -108,33 +156,88 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.load_data()
+        this.get_token_from_storage()
     }
 
     render() {
+
+        const {collapsed} = this.state;
         return (
-            <div className="App">
-                <Routes>
-                    <Route path='*' element={<NotFound404/>}/>
 
-                    <Route path='/' element={<AuthorList authors={this.state.authors}/>}/>
-                    {/* в старом варианте выглядело так  */}
-                    {/*<Route exact path='/' component={() => <AuthorList authors={this.state.authors}/>}/>*/}
-                    {/*и не оборачивали в Routes*/}
-                    {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
-                    <Route path='/books' element={<BookList books={this.state.books}/>}/>
-                    <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>
-                    <Route path='/todos' element={<ToDoList todos={this.state.todos}/>}/>
+            <BrowserRouter>
+                <Layout style={{minHeight: '100vh'}}>
 
-                    <Route path='/author/:username' element={<AuthorBookList items={this.state.books}/>}/>
+                    <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+                        <div className="logo"/>
+                        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
 
-                    <Route path="/project/:name" element={<ProjectToDoList items={this.state.todos}/>}/>
+                            <Menu.Item key="1" icon={<PieChartOutlined/>}>
+                                <Link to={'/'}>Authors</Link>
+                            </Menu.Item>
 
-                    <Route path='/login' element={<LoginForm
-                        get_token={(username, password) => this.get_token(username, password)}/>}/>
+                            <Menu.Item key="2" icon={<DesktopOutlined/>}>
+                                <Link to={'/projects'}>Projects</Link>
 
-                </Routes>
-            </div>
+                            </Menu.Item>
+
+                            {/*<SubMenu key="sub1" icon={<UserOutlined/>} title="User">*/}
+                            {/*    <Menu.Item key="3">Tom</Menu.Item>*/}
+                            {/*    <Menu.Item key="4">Bill</Menu.Item>*/}
+                            {/*    <Menu.Item key="5">Alex</Menu.Item>*/}
+                            {/*</SubMenu>*/}
+                            {/*<SubMenu key="sub2" icon={<TeamOutlined/>} title="Team">*/}
+                            {/*    <Menu.Item key="6">Team 1</Menu.Item>*/}
+                            {/*    <Menu.Item key="8">Team 2</Menu.Item>*/}
+                            {/*</SubMenu>*/}
+                            <Menu.Item key="9" icon={<FileOutlined/>}>
+                                <Link to={'/todos'}>ToDo</Link>
+                            </Menu.Item>
+                            <Menu.Item key="10" icon={<UserOutlined/>}>
+                                {
+                                    this.is_authenticated() ?
+                                        <Link to={'/'} onClick={() => this.logout()}>
+                                            Logout {this.get_user_name()}</Link> :
+                                    <Link to={'/login'}>Login</Link>
+                                }
+                            </Menu.Item>
+                        </Menu>
+                    </Sider>
+
+                    <Layout className="site-layout">
+                        <Header className="site-layout-background" style={{padding: 0}}/>
+                        <Content>
+
+                            <div className="App">
+                                <Routes>
+                                    <Route path='*' element={<NotFound404/>}/>
+
+                                    <Route path='/' element={<AuthorList authors={this.state.authors}/>}/>
+                                    {/* в старом варианте выглядело так  */}
+                                    {/*<Route exact path='/' component={() => <AuthorList authors={this.state.authors}/>}/>*/}
+                                    {/*и не оборачивали в Routes*/}
+                                    {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
+                                    <Route path='/books' element={<BookList books={this.state.books}/>}/>
+                                    <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>
+                                    <Route path='/todos' element={<ToDoList todos={this.state.todos}/>}/>
+
+                                    <Route path='/author/:username'
+                                           element={<AuthorBookList items={this.state.books}/>}/>
+
+                                    <Route path="/project/:name" element={<ProjectToDoList items={this.state.todos}/>}/>
+
+                                    <Route path='/login' element={<LoginForm
+                                        get_token={(username, password) => this.get_token(username, password)}/>}/>
+
+                                </Routes>
+                            </div>
+
+                        </Content>
+                        <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
+                    </Layout>
+                </Layout>
+
+            </BrowserRouter>
+
         )
     }
 }

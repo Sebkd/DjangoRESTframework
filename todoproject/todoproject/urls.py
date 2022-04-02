@@ -46,8 +46,8 @@ router.register('todo',
 #                 AuthorApiModelViewSet)  # просто посмотреть AuthorApiModelViewSet
 
 urlpatterns = [
-    path('api-token-auth/', views.obtain_auth_token),
-    path('api-tokenjwt-auth/', obtain_jwt_token),
+    path('api/api-token-auth/', views.obtain_auth_token),
+    path('api/api-tokenjwt-auth/', obtain_jwt_token),
 
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),

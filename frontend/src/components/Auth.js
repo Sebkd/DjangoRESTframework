@@ -16,7 +16,9 @@ class LoginForm extends React.Component {
     }
 
     handleSubmit(event) {
+        console.log(this.state.username + ' ' + this.state.password)
         this.props.get_token(this.state.username, this.state.password)
+        console.log(this.state.username + ' ' + this.state.password) // чтобы при Submit форма не отправлялась
         event.preventDefault() // чтобы при Submit форма не отправлялась
         // console.log(this.state.login + ' ' + this.state.password) // чтобы при Submit форма не отправлялась
 
@@ -33,12 +35,12 @@ class LoginForm extends React.Component {
             // </form>
 
             <Form
-                onSubmit={(event) => this.handleSubmit(event)}
+                // onSubmit={(event) => this.handleSubmit(event)}
                 name="basic"
                 labelCol={{span: 8}}
                 wrapperCol={{span: 16}}
                 initialValues={{remember: true}}
-                // onFinish={onFinish}
+                onFinish={(event) => this.handleSubmit(event)}
                 // onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
@@ -48,7 +50,7 @@ class LoginForm extends React.Component {
                     rules={[{required: true, message: 'Please input your username!'}]}
                 >
                     <Input
-                        type="text" name="login" placeholder="login"
+                        type="text" name="username" placeholder="username"
                         value={this.state.username}
                         onChange={(event) => this.handleChange(event)}
                     />
