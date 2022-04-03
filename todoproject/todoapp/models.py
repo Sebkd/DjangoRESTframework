@@ -9,6 +9,7 @@ from django.utils import timezone
 from authors.models import Author
 
 
+
 class Project(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=128)

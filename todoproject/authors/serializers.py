@@ -1,9 +1,12 @@
 from abc import ABC
+from rest_framework import serializers
 
 from rest_framework.relations import HyperlinkedRelatedField, SlugRelatedField, RelatedField
 from rest_framework.serializers import StringRelatedField, PrimaryKeyRelatedField
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
 from .models import Author, Article, Biography, Book
+
+from django.contrib.auth.models import User, AbstractUser
 
 
 # HyperlinkedModelSerializer
@@ -19,10 +22,18 @@ class SimpleAuthorModelSerializer(HyperlinkedModelSerializer):
         fields = ['first_name', 'last_name', ]
 
 
+
+# class SimpleUserModelSerializer(ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = 'username'
+
 class AuthorModelSerializer(ModelSerializer):#work model
+    username = serializers.CharField(source='username.username')
     class Meta:
         model = Author
-        # exclude = ['url']
+        # # exclude = ['url']
+        # fields = ['username',]
         fields = '__all__'
 
 
