@@ -84,10 +84,10 @@ from rest_framework.parsers import JSONParser
 #     return Response(serializer.data)
 
 class AuthorCustomMixinViewSet( #work model
-    mixins.CreateModelMixin,
+    # mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
-    mixins.DestroyModelMixin,
+    # mixins.DestroyModelMixin,
     mixins.ListModelMixin,
     GenericViewSet):
     queryset = Author.objects.all()
