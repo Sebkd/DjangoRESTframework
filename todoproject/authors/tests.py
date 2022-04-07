@@ -33,4 +33,5 @@ class TestAuthorMixinViewSet(TestCase):
         response = client.get(f'/api/authors/{author.uid}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         client.logout()
+
 # Create your tests here.
