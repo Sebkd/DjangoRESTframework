@@ -20,7 +20,7 @@ from authors.views import AuthorModelViewSet, ArticleModelViewSet, BookModelView
     AuthorCustomMixinViewSet
 # from authors.views import AuthorApiView, AuthorListApiView, AuthorApiViewSet, AuthorApiModelViewSet
 from todoapp.views import ProjectModelViewSet, ToDoModelViewSet, \
-    ToDoCustomFilterModelViewSet
+    ToDoCustomFilterModelViewSet, ProjectCustomMixinViewSet, ToDoCustomMixinViewSet
 
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
@@ -34,10 +34,14 @@ router.register('book', BookModelViewSet)  # регистрируем роуте
 # router.register('article',
 #                 ArticleModelViewSet)  # регистрируем роутер за article и определяем что он сам сделаем все пути
 
+# router.register('project',
+#                 ProjectModelViewSet)
 router.register('project',
-                ProjectModelViewSet)
+                ProjectCustomMixinViewSet)
+# router.register('todo',
+#                 ToDoModelViewSet)
 router.register('todo',
-                ToDoModelViewSet)
+                ToDoCustomMixinViewSet)
 
 # router.register('testviewset', # просто посмотреть AuthorApiViewSet
 #                 AuthorApiViewSet, basename='api') # viewset не может генерировать basename поэтому его нужно вручную

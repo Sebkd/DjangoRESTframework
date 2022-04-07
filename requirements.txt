@@ -14,3 +14,4 @@ wheel~=0.36.2
 setuptools~=57.0.0
 requests~=2.27.1
 djangorestframework-jwt~=1.11.0
+mixer~=7.2.2
