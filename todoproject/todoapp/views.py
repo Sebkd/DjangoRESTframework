@@ -60,8 +60,7 @@ class ToDoCustomMixinViewSet( #work model
         instance.save()
 
 
-class ToDoModelViewSet(ModelViewSet):#work model
-    queryset = ToDo.objects.all()
+class ToDoModelViewSet(ModelViewSet):
     serializer_class = ToDoModelSerializer
     pagination_class = ToDoLimitOffsetPagination
     filterset_class = ToDoFilter

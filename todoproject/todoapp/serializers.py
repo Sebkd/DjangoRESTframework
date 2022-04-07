@@ -18,7 +18,7 @@ class SimpleProjectModelSerializer(HyperlinkedModelSerializer):
 class ProjectModelSerializer(HyperlinkedModelSerializer): #work model
     # authors = SimpleAuthorModelSerializer(many=True)
     # authors = SlugRelatedField(many=True, slug_field='username', queryset=Author.objects.all())
-    authors = serializers.SlugRelatedField(queryset=Author.objects.all(), slug_field='uid')
+    authors = serializers.SlugRelatedField(queryset=Author.objects.all(), slug_field='uid') # выборка один из многого
 
     class Meta:
         model = Project
@@ -42,8 +42,8 @@ class ToDoModelSerializer(HyperlinkedModelSerializer):
         fields = '__all__'
 
 class ToDoHyperModelSerializer(HyperlinkedModelSerializer):# work model HyperlinkedModelSerializer
-    author = serializers.SlugRelatedField(queryset=Author.objects.all(), slug_field='uid')
-    project = serializers.SlugRelatedField(queryset=Project.objects.all(), slug_field='name')
+    author = serializers.SlugRelatedField(queryset=Author.objects.all(), slug_field='uid') # выборка один из многого
+    project = serializers.SlugRelatedField(queryset=Project.objects.all(), slug_field='name') # выборка один из многого
     # author = AuthorStringRelatedField()
     # project = ProjectStringRelatedField()
 
