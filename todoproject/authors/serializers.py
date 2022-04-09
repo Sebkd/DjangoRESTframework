@@ -30,10 +30,17 @@ class SimpleAuthorModelSerializer(HyperlinkedModelSerializer):
 #         model = User
 #         fields = 'username'
 
+class UserSerializers(ModelSerializer):#work model
+    class Meta:
+        model = User
+        fields = '__all__'
+
+
 class AuthorModelSerializer(ModelSerializer):#work model
     # username = serializers.CharField(source='username.username', read_only=False)
     # username = serializers.PrimaryKeyRelatedField(queryset=get_user_model().objects.all(), source='username.username', )
     username = serializers.SlugRelatedField(queryset = get_user_model().objects.all(),slug_field = 'username')
+
     class Meta:
         model = Author
         # fields = ['username',]
