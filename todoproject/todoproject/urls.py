@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from authors.views import AuthorModelViewSet, ArticleModelViewSet, BookModelViewSet, BiographyModelViewSet, \
-    AuthorCustomMixinViewSet
+    AuthorCustomMixinViewSet, UserCustomMixinViewSet
 # from authors.views import AuthorApiView, AuthorListApiView, AuthorApiViewSet, AuthorApiModelViewSet
 from todoapp.views import ProjectModelViewSet, ToDoModelViewSet, \
     ToDoCustomFilterModelViewSet, ProjectCustomMixinViewSet, ToDoCustomMixinViewSet
@@ -42,6 +42,9 @@ router.register('project',
 #                 ToDoModelViewSet)
 router.register('todo',
                 ToDoCustomMixinViewSet)
+
+router.register('users',
+                UserCustomMixinViewSet)
 
 # router.register('testviewset', # просто посмотреть AuthorApiViewSet
 #                 AuthorApiViewSet, basename='api') # viewset не может генерировать basename поэтому его нужно вручную
