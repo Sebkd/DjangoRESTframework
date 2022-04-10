@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
 from authors.views import AuthorModelViewSet, ArticleModelViewSet, BookModelViewSet, BiographyModelViewSet, \
     AuthorCustomMixinViewSet, UserCustomMixinViewSet
@@ -24,6 +25,21 @@ from todoapp.views import ProjectModelViewSet, ToDoModelViewSet, \
 
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
+
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title='TODO',
+        default_version='0.1',
+        description='ToDo messages',
+        contact=openapi.Contact(email='sebkd@mail.ru'),
+        license=openapi.License(name='MIT License'),
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
+)
 
 router = DefaultRouter()  # определяем роутер
 router.register('authors',
@@ -62,4 +78,8 @@ urlpatterns = [
     # path('apiview/', AuthorApiView.as_view()), # просто посмотреть APIView
     # path('apilistview/', AuthorListApiView.as_view()), # просто посмотреть AuthorListApiView
     # path('author/<str:newparam>/', AuthorModelViewSet.as_view({'get': 'list'})), # просто посмотреть get_queryset с kwarg
+
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

@@ -13,7 +13,7 @@ from .filters import AuthorFilter, BookFilter
 
 from .models import Author, Book, Biography, Article
 from .serializers import AuthorModelSerializer, BookModelSerializer, BiographyModelSerializer, ArticleModelSerializer, \
-    SmallAuthorModelSerializer, UserSerializers, AuthorUserModelSerializer
+    SmallAuthorModelSerializer, UserSerializers, AuthorUserModelSerializer, AuthorUserSimpleModelSerializer
 
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer, StaticHTMLRenderer
 from rest_framework.parsers import JSONParser
@@ -95,6 +95,10 @@ class AuthorCustomMixinViewSet( #work model
     serializer_class = AuthorUserModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
     filterset_class = AuthorFilter
 
+    def get_serializer_class(self):
+        if self.request.version == '1.0':
+            return AuthorUserSimpleModelSerializer
+        return AuthorUserModelSerializer
 
 class UserCustomMixinViewSet(
     # mixins.CreateModelMixin,
