@@ -36,14 +36,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'drf_yasg',
+    #my
     'authors',
     'todoapp',
+    #other
     'corsheaders',
     'rest_framework',
-
     'django_filters',  # нету в методичке
+    'rest_framework.authtoken',
 
-    'rest_framework.authtoken'
 
 ]
 
@@ -155,4 +157,6 @@ REST_FRAMEWORK = {
 
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ],
+
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
 }
