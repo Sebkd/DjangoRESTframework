@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,7 +13,7 @@ from .filters import AuthorFilter, BookFilter
 
 from .models import Author, Book, Biography, Article
 from .serializers import AuthorModelSerializer, BookModelSerializer, BiographyModelSerializer, ArticleModelSerializer, \
-    SmallAuthorModelSerializer
+    SmallAuthorModelSerializer, UserSerializers, AuthorUserModelSerializer, AuthorUserSimpleModelSerializer
 
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer, StaticHTMLRenderer
 from rest_framework.parsers import JSONParser
@@ -84,16 +85,30 @@ from rest_framework.parsers import JSONParser
 #     return Response(serializer.data)
 
 class AuthorCustomMixinViewSet( #work model
-    # mixins.CreateModelMixin,
+    mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
     # mixins.DestroyModelMixin,
     mixins.ListModelMixin,
     GenericViewSet):
     queryset = Author.objects.all()
-    serializer_class = AuthorModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
+    serializer_class = AuthorUserModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
     filterset_class = AuthorFilter
 
+    def get_serializer_class(self):
+        if self.request.version == '1.0':
+            return AuthorUserSimpleModelSerializer
+        return AuthorUserModelSerializer
+
+class UserCustomMixinViewSet(
+    # mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    # mixins.UpdateModelMixin,
+    # mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    GenericViewSet):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializers  # с помощью какого сериализатора необходимо преобразовать в JSON
 
 
 class AuthorModelViewSet(ModelViewSet):  # ModelViewSet реализует CRUD

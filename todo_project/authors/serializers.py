@@ -24,30 +24,61 @@ class SimpleAuthorModelSerializer(HyperlinkedModelSerializer):
         fields = ['first_name', 'last_name', ]
 
 
-
 # class SimpleUserModelSerializer(ModelSerializer):
 #     class Meta:
 #         model = User
 #         fields = 'username'
 
-class AuthorModelSerializer(ModelSerializer):#work model
-    # username = serializers.CharField(source='username.username', read_only=False)
-    # username = serializers.PrimaryKeyRelatedField(queryset=get_user_model().objects.all(), source='username.username', )
-    username = serializers.SlugRelatedField(queryset = get_user_model().objects.all(),slug_field = 'username')
+class UserSerializers(ModelSerializer):  # work model
+    class Meta:
+        model = User
+        fields = ['username', 'is_superuser', 'is_staff', ]
+
+
+class UserSimpleSerializers(ModelSerializer):  # work model
+    class Meta:
+        model = User
+        fields = ['username', ]
+
+
+class AuthorUserModelSerializer(ModelSerializer):  # work model for Author
+    username = UserSerializers()
+
     class Meta:
         model = Author
-        # fields = ['username',]
         fields = '__all__'
 
     def create(self, validated_data):
         return Author.objects.create(**validated_data)
 
 
-class AuthorStringRelatedField(StringRelatedField, ABC):#work in todo
+class AuthorUserSimpleModelSerializer(ModelSerializer):  # work model for Author
+    username = UserSimpleSerializers()
+
     class Meta:
         model = Author
         fields = '__all__'
 
+    def create(self, validated_data):
+        return Author.objects.create(**validated_data)
+
+
+class AuthorModelSerializer(ModelSerializer):  # work model for Book, Project, ToDo
+    username = serializers.SlugRelatedField(queryset=get_user_model().objects.all(), slug_field='username')
+
+    class Meta:
+        model = Author
+        # fields = '__all__'
+        fields = ['username', ]
+
+    def create(self, validated_data):
+        return Author.objects.create(**validated_data)
+
+
+class AuthorStringRelatedField(StringRelatedField, ABC):  # work in todo
+    class Meta:
+        model = Author
+        fields = '__all__'
 
 
 class BiographyModelSerializer(HyperlinkedModelSerializer):
