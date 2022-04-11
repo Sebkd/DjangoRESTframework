@@ -42,6 +42,7 @@ class Query(graphene.ObjectType):
     all_projects = graphene.List(ProjectType)
     all_authors = graphene.List(AuthorType)
     all_users = graphene.List(UserType)
+    author_by_id = graphene.Field(AuthorType, uuid=graphene.UUID(required=True))
 
 
     def resolve_all_projects(self, info):  # graphene ищет resolve_
@@ -55,6 +56,12 @@ class Query(graphene.ObjectType):
 
     def resolve_all_users(self, info):  # graphene ищет resolve_
         return get_user_model().objects.all()
+
+    def resolve_author_by_id(self, info, uuid):
+        try:
+            return Author.objects.get(uid=uuid)
+        except Author.DoesNotExist:
+            return None
 
     # hello = graphene.String(default_value='Hi')
 
