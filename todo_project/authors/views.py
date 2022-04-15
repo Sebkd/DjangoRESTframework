@@ -101,9 +101,9 @@ class AuthorCustomMixinViewSet( #work model
         return AuthorUserModelSerializer
 
 class UserCustomMixinViewSet(
-    # mixins.CreateModelMixin,
+    mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
-    # mixins.UpdateModelMixin,
+    mixins.UpdateModelMixin,
     # mixins.DestroyModelMixin,
     mixins.ListModelMixin,
     GenericViewSet):

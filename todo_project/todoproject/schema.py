@@ -48,11 +48,23 @@ class Query(graphene.ObjectType):
     authors_by_project_name = graphene.List(AuthorType, project=graphene.String(required=True))
 
     def resolve_authors_by_project_name(self, info, project=None):
+        '''
+        Выборка пользователя проекта (может вытаскивать и нескольких)
+        :param info:
+        :param project: название проекта
+        :return: объект автора
+        '''
         projects = Project.objects.filter(name__icontains=project).values('authors')
-        # authors = Author.objects.filter()
-        # return authors
+        authors = Author.objects.filter(uid__in=projects)
+        return authors
 
     def resolve_projects_by_author_name(self, info, authors=None):
+        '''
+               Выборка проекта по имени автора
+               :param info:
+               :param authors: пользователь
+               :return: объект проект
+               '''
         projects = Project.objects.all()
         if authors:
             projects = projects.filter(authors__username__username=authors)
@@ -83,6 +95,7 @@ class Query(graphene.ObjectType):
         return books
 
     # hello = graphene.String(default_value='Hi')
+
 
 # class AuthorMutation(graphene.Mutation):
 #     class Arguments:
