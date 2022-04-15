@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'drf_yasg',
+
     #my
     'authors',
     'todoapp',
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',  # нету в методичке
     'rest_framework.authtoken',
-
+    'drf_yasg',
+    'graphene_django',
 
 ]
 
@@ -159,4 +160,8 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
+}
+
+GRAPHENE = {
+    'SCHEMA': "todoproject.schema.schema"
 }
