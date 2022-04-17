@@ -8,17 +8,17 @@ const AuthorItem = ({author}) => {
             <Link to={`author/${author.username}`}> {author.username} </Link>
                 </td>
                 <td>
-            {author.first_name}
+            {author.uid}
                 </td>
-                <td>
-            {author.last_name}
-                </td>
-                <td>
-            {author.birthday_year}
-                </td>
-                <td>
-            {author.email}
-                </td>
+            {/*    <td>*/}
+            {/*{author.last_name}*/}
+            {/*    </td>*/}
+            {/*    <td>*/}
+            {/*{author.birthday_year}*/}
+            {/*    </td>*/}
+            {/*    <td>*/}
+            {/*{author.email}*/}
+            {/*    </td>*/}
                 </tr>)
             }
             const AuthorList = ({authors}) => {
@@ -27,17 +27,17 @@ const AuthorItem = ({author}) => {
             Username
             </th>
             <th>
-            First name
+            UID
             </th>
-            <th>
-            Last Name
-            </th>
-            <th>
-            Birthday year
-            </th>
-            <th>
-            Email
-            </th>
+            {/*<th>*/}
+            {/*Last Name*/}
+            {/*</th>*/}
+            {/*<th>*/}
+            {/*Birthday year*/}
+            {/*</th>*/}
+            {/*<th>*/}
+            {/*Email*/}
+            {/*</th>*/}
         {authors.map((author) => <AuthorItem author={author}/>)}
             </table>)
         }

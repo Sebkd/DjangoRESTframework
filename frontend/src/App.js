@@ -23,6 +23,8 @@ import ProjectList from "./components/Project";
 import ToDoList from "./components/ToDo";
 import ProjectToDoList from "./components/ProjectToDo";
 import LoginForm from "./components/Auth";
+// import project from "./components/Project";
+// import toDo from "./components/ToDo";
 
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -91,11 +93,11 @@ class App extends React.Component {
             }).catch(error => alert('Неверный логин или пароль'))
     }
 
-    set_user_name(username){
+    set_user_name(username) {
         this.state.username = username
     }
 
-    get_user_name(){
+    get_user_name() {
         return this.state.username
     }
 
@@ -155,6 +157,26 @@ class App extends React.Component {
             }).catch(error => console.log(error))
     }
 
+    deleteProject(uid, url_prj) {
+        const headers = this.get_headers()
+        axios.delete(url_prj, {headers})
+            .then(response => {
+                this.setState({projects: this.state.projects.filter((item) => item.uid !== uid)})
+            }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    deleteToDo(uid, url_todo) {
+        const headers = this.get_headers()
+        axios.delete(url_todo, {headers})
+            .then(response => {
+                this.setState({todos: this.state.todos.filter((item) => item.uid !== uid)})
+            }).catch(error => {
+            console.log(error)
+        })
+    }
+
     componentDidMount() {
         this.get_token_from_storage()
     }
@@ -197,7 +219,7 @@ class App extends React.Component {
                                     this.is_authenticated() ?
                                         <Link to={'/'} onClick={() => this.logout()}>
                                             Logout {this.get_user_name()}</Link> :
-                                    <Link to={'/login'}>Login</Link>
+                                        <Link to={'/login'}>Login</Link>
                                 }
                             </Menu.Item>
                         </Menu>
@@ -217,8 +239,10 @@ class App extends React.Component {
                                     {/*и не оборачивали в Routes*/}
                                     {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
                                     <Route path='/books' element={<BookList books={this.state.books}/>}/>
-                                    <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>
-                                    <Route path='/todos' element={<ToDoList todos={this.state.todos}/>}/>
+                                    <Route path='/projects' element={<ProjectList projects={this.state.projects}
+                                                                                  deleteProject={(uid, url_prj) => this.deleteProject(uid, url_prj)}/>}/>
+                                    <Route path='/todos' element={<ToDoList todos={this.state.todos}
+                                                                            deleteToDo={(uid, url_todo) => this.deleteToDo(uid, url_todo)}/>}/>
 
                                     <Route path='/author/:username'
                                            element={<AuthorBookList items={this.state.books}/>}/>
