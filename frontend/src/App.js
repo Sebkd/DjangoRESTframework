@@ -23,6 +23,7 @@ import ProjectList from "./components/Project";
 import ToDoList from "./components/ToDo";
 import ProjectToDoList from "./components/ProjectToDo";
 import LoginForm from "./components/Auth";
+import ProjectForm from "./components/ProjectForm"
 // import project from "./components/Project";
 // import toDo from "./components/ToDo";
 
@@ -167,6 +168,20 @@ class App extends React.Component {
         })
     }
 
+    createProject(name, author, link){
+        const headers = this.get_headers()
+        const data = {name: name, authors: [author,], link: link}
+        axios.post(`http://127.0.0.1:8000/api/project/`, data, {headers})
+            .then(response => {
+                let newProject = response.data
+                const author = this.state.authors.filter((item) => item.uid === newProject.author)
+                newProject.author = author
+                this.setState({projects: [...this.state.projects, newProject]})
+            }).catch(error => {
+                console.log(error)
+        })
+    }
+
     deleteToDo(uid, url_todo) {
         const headers = this.get_headers()
         axios.delete(url_todo, {headers})
@@ -252,6 +267,9 @@ class App extends React.Component {
                                     <Route path='/login' element={<LoginForm
                                         get_token={(username, password) => this.get_token(username, password)}/>}/>
 
+                                    <Route path='/projects/create' element={<ProjectForm authors={this.state.authors}
+                                        createProject={(name, author, link) => this.createProject(name, author, link)} />}/>
+                                        {/*createProject={(name, author, link) => this.createProject(name, author, link)}*/}
                                 </Routes>
                             </div>
 
