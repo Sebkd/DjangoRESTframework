@@ -1,15 +1,13 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 
-const ProjectItem = ({project, deleteProject}) => {
+const ProjectItem = ({project, author, deleteProject}) => {
     return (
         <tr>
-            {/*<td>{project.url}</td>*/}
             <Link to={`/project/${project.name.replace(/\s/g, '')}`}> {project.name} </Link>
-
-            {/*<td>{project.name}</td>*/}
             <td>{project.link}</td>
-            <td>{project.authors.join(' & ')}</td>
+            <td>{project.authors.join(' & ')}
+            </td>
             <td>
                 <button onClick={() => deleteProject(project.uid, project.url)}
                         type='button'>Delete
@@ -29,7 +27,8 @@ const ProjectList = ({projects, deleteProject}) => {
                 <th>AUTHORS</th>
                 <th></th>
             </tr>
-            {projects.map((project) => <ProjectItem project={project} deleteProject={deleteProject}/>)}
+            {projects.map((project) => <ProjectItem project={project}
+                                                    deleteProject={deleteProject}/>)}
         </table>
     <Link to="/projects/create"> Create </Link>
         </div>

@@ -1,12 +1,11 @@
 import React from "react";
-import LoginForm from "./Auth";
 
 
-class ProjectForm extends React.Component {
-    //name, authors, link
+class ToDoForm extends React.Component {
+    //project, author, content
     constructor(props) {
         super(props);
-        this.state = {name: '', authors: props.authors.uid, link: '',};
+        this.state = {projects: props.authors.uid, authors: props.authors.uid, content: '',};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -16,24 +15,31 @@ class ProjectForm extends React.Component {
                 [event.target.name]: event.target.value
             }
         )
+        console.log(this.state.project)
+        console.log(this.state.author)
+        console.log(this.state.content)
     }
 
     handleSubmit(event) {
-        this.props.createProject(this.state.name, this.state.author, this.state.link);
+        console.log(this.state.project)
+        console.log(this.state.author)
+        console.log(this.state.content)
+        this.props.createToDo(this.state.project, this.state.author, this.state.content);
         event.preventDefault()
     }
 
     render() {
         return (
             <form onSubmit={(event) => this.handleSubmit(event)}>
-                <div className="form-group">
-                    <label for="name">name</label>
-                    <input type="text" className="form-control" name="name"
-                           value={this.state.name}
-                           onChange={(event) => this.handleChange(event)}
-                    />
-                </div>
 
+                <div className="form-group">
+                    <label htmlFor="project">project</label>
+                    <select name="project" className='form-control'
+                            onChange={(event) => this.handleChange(event)}>
+                        {this.props.projects.map((item) => <option
+                            value={item.uid}>{item.name}</option>)}
+                    </select>
+                </div>
 
                 <div className="form-group">
                     <label for="author">author</label>
@@ -42,14 +48,12 @@ class ProjectForm extends React.Component {
                         {this.props.authors.map((item) => <option
                             value={item.uid}>{item.username}</option>)}
                     </select>
-                    {/*<input type="number" className="form-control" name="author"*/}
-                    {/*       value={this.state.author} onChange={(event) => this.handleChange(event)}/>*/}
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="link">link</label>
-                    <input type="text" className="form-control" name="link"
-                           value={this.state.link}
+                    <label htmlFor="content">content</label>
+                    <input type="text" className="form-control" name="content"
+                           value={this.state.content}
                            onChange={(event) => this.handleChange(event)}
                     />
                 </div>
@@ -61,4 +65,4 @@ class ProjectForm extends React.Component {
     }
 }
 
-export default ProjectForm
+export default ToDoForm
