@@ -177,7 +177,8 @@ class App extends React.Component {
                 let newProject = response.data
                 const author = this.state.authors.filter((item) => item.uid === newProject.author)
                 newProject.author = author
-                this.setState({projects: [...this.state.projects, newProject]})
+                this.state.projects.push(newProject)
+                // this.setState({projects: [...this.state.projects, newProject]})
             }).catch(error => {
                 console.log(error)
         })
@@ -205,7 +206,8 @@ class App extends React.Component {
                 newToDo.author = author
                 const project = this.state.projects.filter((item) => item.uid === newToDo.project)
                 newToDo.project = project
-                this.setState({todos: [...this.state.todos, newToDo]})
+                this.state.todos.push(newToDo)
+                // this.setState({todos: [...this.state.todos, newToDo]})
             }).catch(error => {
                 console.log(error)
         })
@@ -281,7 +283,7 @@ class App extends React.Component {
                                     <Route path='/author/:username'
                                            element={<AuthorBookList items={this.state.books}/>}/>
 
-                                    <Route path="/project/:name" element={<ProjectToDoList items={this.state.todos}/>}/>
+                                    <Route path="/project/:name" element={<ProjectToDoList items={this.state.todos} projects_list={this.state.projects}/>}/>
 
                                     <Route path='/login' element={<LoginForm
                                         get_token={(username, password) => this.get_token(username, password)}/>}/>

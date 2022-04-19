@@ -15,15 +15,9 @@ class ToDoForm extends React.Component {
                 [event.target.name]: event.target.value
             }
         )
-        console.log(this.state.project)
-        console.log(this.state.author)
-        console.log(this.state.content)
     }
 
     handleSubmit(event) {
-        console.log(this.state.project)
-        console.log(this.state.author)
-        console.log(this.state.content)
         this.props.createToDo(this.state.project, this.state.author, this.state.content);
         event.preventDefault()
     }

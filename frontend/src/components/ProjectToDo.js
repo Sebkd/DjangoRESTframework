@@ -11,11 +11,11 @@ const TodoItem = ({todo}) => {
         </tr>
     )
 }
-const ProjectToDoList = ({items}) => {
-    let {name} = useParams();
+const ProjectToDoList = ({items, projects_list}) => {
+    let name = useParams();
     console.log(name)
-
-    let filtered_items = items.filter((item) => item.project.replace(/\s/g, '') === name)
+    let project_uid =  projects_list.filter((item) => item.name.replace(/\s/g, '') === name.name)[0]
+    let filtered_items = items.filter((item) => item.project === project_uid.uid)
     // let filtered_items = items.filter(function (item) {
     //     let projectname = item.project.replace(/\s/g, '')
     //     console.log(name)
