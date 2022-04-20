@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from "react-router-dom";
-import SearchBar from "./Search";
-import Fuse from "fuse.js";
 import {Space} from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
 
@@ -77,7 +75,7 @@ const ProjectList = ({projects, deleteProject}) => {
                 {/*    <ol>*/}
                 {/*        <Link to={`/project/${item.name.replace(/\s/g, '')}`}> {item.name} </Link>*/}
                 {/*    </ol>*/}
-                
+
             </ul>
         </div>
     )
