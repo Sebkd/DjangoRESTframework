@@ -53,7 +53,9 @@ const ProjectList = ({projects, deleteProject}) => {
                     <th>AUTHORS</th>
                     <th></th>
                 </tr>
-                {projects.map((project) => <ProjectItem project={project}
+                {/*{projects.map((project) => <ProjectItem project={project}*/}
+                {/*                                        deleteProject={deleteProject}/>)}*/}
+                {results.map((project) => <ProjectItem project={project}
                                                         deleteProject={deleteProject}/>)}
             </table>
             <Link to="/projects/create"> Create </Link>
@@ -75,12 +77,7 @@ const ProjectList = ({projects, deleteProject}) => {
                 {/*    <ol>*/}
                 {/*        <Link to={`/project/${item.name.replace(/\s/g, '')}`}> {item.name} </Link>*/}
                 {/*    </ol>*/}
-                                { results.map(item => (
-                    <ol>
-                        <Link to={`/project/${item.name.replace(/\s/g, '')}`}> {item.name} </Link>
-                    </ol>
-                    // <li>{item.name}</li>
-                ))}
+                
             </ul>
         </div>
     )
