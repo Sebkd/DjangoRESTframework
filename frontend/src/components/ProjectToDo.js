@@ -11,21 +11,12 @@ const TodoItem = ({todo}) => {
         </tr>
     )
 }
-const ProjectToDoList = ({items}) => {
-    let {name} = useParams();
-    console.log(name)
+const ProjectToDoList = ({items, projects_list}) => {
+    let name = useParams();
 
-    let filtered_items = items.filter((item) => item.project.replace(/\s/g, '') === name)
-    // let filtered_items = items.filter(function (item) {
-    //     let projectname = item.project.replace(/\s/g, '')
-    //     console.log(name)
-    //     console.log(item.project)
-    //     console.log(projectname)
-    //     console.log(projectname == name)
-    //     if (projectname == name) return 1
-    // })
+    let project_uid = projects_list.filter((item) => item.name.replace(/\s/g, '') === name.name)[0]
 
-
+    let filtered_items = items.filter((item) => item.project === project_uid.uid)
 
     return (
         <table>

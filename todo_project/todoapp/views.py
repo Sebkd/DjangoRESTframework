@@ -36,6 +36,10 @@ class ProjectCustomMixinViewSet( #work model
     pagination_class = ProjectLimitOffsetPagination
     filterset_class = ProjectFilter
 
+    def perform_destroy(self, instance):
+        instance.is_active = False
+        instance.save()
+
 
 # class ProjectCustomFilterModelViewSet(ModelViewSet):  # используем filters
 #     queryset = Project.objects.all()
