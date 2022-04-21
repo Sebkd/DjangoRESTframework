@@ -95,10 +95,10 @@ class AuthorCustomMixinViewSet( #work model
     serializer_class = AuthorUserModelSerializer  # с помощью какого сериализатора необходимо преобразовать в JSON
     filterset_class = AuthorFilter
 
-    def get_serializer_class(self):
-        if self.request.version == '1.0':
-            return AuthorUserSimpleModelSerializer
-        return AuthorUserModelSerializer
+    # def get_serializer_class(self):
+    #     if self.request.version == '1.0':
+    #         return AuthorUserSimpleModelSerializer
+    #     return AuthorUserModelSerializer
 
 class UserCustomMixinViewSet(
     mixins.CreateModelMixin,

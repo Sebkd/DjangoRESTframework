@@ -41,8 +41,10 @@ class UserSimpleSerializers(ModelSerializer):  # work model
         fields = ['username', ]
 
 
-class AuthorUserModelSerializer(HyperlinkedModelSerializer):  # work model for Author ModelSerializer
-    username = UserSerializers()
+class AuthorUserModelSerializer(ModelSerializer):  # work model for Author ModelSerializer
+    # username = UserSerializers()
+    # username = User.objects.all()
+    username = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username')
 
     class Meta:
         model = Author
@@ -63,7 +65,7 @@ class AuthorUserSimpleModelSerializer(ModelSerializer):  # work model for Author
         return Author.objects.create(**validated_data)
 
 
-class AuthorModelSerializer(ModelSerializer):  # work model for Book, Project, ToDo
+class AuthorModelSerializer(ModelSerializer):
     username = serializers.SlugRelatedField(queryset=get_user_model().objects.all(), slug_field='username')
 
     class Meta:
@@ -75,7 +77,7 @@ class AuthorModelSerializer(ModelSerializer):  # work model for Book, Project, T
         return Author.objects.create(**validated_data)
 
 
-class AuthorStringRelatedField(StringRelatedField, ABC):  # work in todo
+class AuthorStringRelatedField(StringRelatedField, ABC):
     class Meta:
         model = Author
         fields = '__all__'
@@ -90,10 +92,10 @@ class BiographyModelSerializer(HyperlinkedModelSerializer):
 
 
 # class BookModelSerializer(ModelSerializer):
-class BookModelSerializer(HyperlinkedModelSerializer):
+class BookModelSerializer(HyperlinkedModelSerializer): #work model
     # authors = SimpleAuthorModelSerializer(many=True)
     # authors = StringRelatedField(many=True, queryset=Author.objects.all())
-    authors = SlugRelatedField(many=True, slug_field='username', queryset=Author.objects.all())
+    authors = SlugRelatedField(many=True, slug_field='uid', queryset=Author.objects.all())
 
     # authors = RelatedField(many=True, queryset=Author.objects.all())
 

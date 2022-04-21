@@ -14,7 +14,9 @@ class Project(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=128)
     link = models.URLField(blank=True)
-    authors = models.ForeignKey(Author, on_delete=models.CASCADE)
+    # authors = models.ForeignKey(Author, on_delete=models.CASCADE)
+    authors = models.ManyToManyField(Author)
+    is_active = models.BooleanField(default=True, auto_created=True)
     # authors = models.ManyToManyField(
     #     Author)  # один автор может иметь несколько проектов и проект может иметь несколько авторов
 
