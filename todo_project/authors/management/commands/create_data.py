@@ -3,6 +3,7 @@ import uuid
 
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User, Group, Permission
+from django.db.models import Q
 from rest_framework.utils import json
 
 from authors.models import Author, Book
@@ -21,11 +22,6 @@ def load_from_json(file_nm):
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        # Book.objects.all().delete()
-        # ToDo.objects.all().delete()
-        # Project.objects.all().delete()
-        # Author.objects.all().delete()
-        # User.objects.all().delete()
 
         users = load_from_json('users')
         User.objects.all().delete()
@@ -45,21 +41,87 @@ class Command(BaseCommand):
         for book in books:
             instance = Author.objects.filter(pk=book['authors'])[0]
             uuid_item = uuid.UUID(book['pk'])
-            new_book = Book(uid=uuid_item, name=book['name'])
+            new_book = Book(uid=uuid_item, name=book['name'],)
             new_book.save()
             new_book.authors.add(instance)
 
         projects = load_from_json('projects')
         Project.objects.all().delete()
         for project in projects:
-            # for number in enumerate(len(project['authors'])):
-            print(len(project['authors']))
-            instance = Author.objects.filter(pk=project['authors'])[0]
-            print(instance)
+            instance = [pk for pk in Author.objects.filter(pk__in=project['authors'])]
             uuid_item = uuid.UUID(project['pk'])
-            print(uuid_item)
             new_project = Project(uid=uuid_item,
                                   name=project['name'],
                                   link=project['link'])
             new_project.save()
-            # new_project.authors.add(instance)
+            new_project.authors.set(instance)
+
+        todos = load_from_json('todos')
+        ToDo.objects.all().delete()
+        for todo in todos:
+            author = Author.objects.filter(pk=todo['author'])[0]
+            project = Project.objects.filter(pk=todo['project'])[0]
+            uuid_item = uuid.UUID(todo['pk'])
+            new_todo = ToDo(uid=uuid_item,
+                            content=todo['content'],
+                            project_id=project.uid,
+                            author_id=author.uid,)
+            new_todo.save()
+        #права
+
+        #книги
+        add_book = Permission.objects.get(codename='add_book')
+        change_book = Permission.objects.get(codename='change_book')
+        delete_book = Permission.objects.get(codename='delete_book')
+
+        #авторы
+        add_author = Permission.objects.get(codename='add_author')
+        change_author = Permission.objects.get(codename='change_author')
+        delete_author = Permission.objects.get(codename='delete_author')
+
+        #проекты
+        add_project = Permission.objects.get(codename='add_project')
+        change_project = Permission.objects.get(codename='change_project')
+        delete_project = Permission.objects.get(codename='delete_project')
+
+        #заметки
+        add_todo = Permission.objects.get(codename='add_todo')
+        change_todo = Permission.objects.get(codename='change_todo')
+        delete_todo = Permission.objects.get(codename='delete_todo')
+
+        Group.objects.all().delete()
+        #Группы
+        #Devops
+        devops_staff = Group.objects.create(name='Devops')
+
+        #права devops: разработчики имеют все права на модель ToDo,
+        # могут просматривать модели Project и Author;
+        devops_staff.permissions.add(add_todo)
+        devops_staff.permissions.add(change_todo)
+        devops_staff.permissions.add(delete_todo)
+
+        #Projectowners
+        project_owners_staff = Group.objects.create(name='Projectowners')
+
+        #права Projectowners: владельцы проектов имеют права на просмотр модели
+        # Author и все права на модель Project и ToDo
+        project_owners_staff.permissions.add(add_todo)
+        project_owners_staff.permissions.add(change_todo)
+        project_owners_staff.permissions.add(delete_todo)
+
+        project_owners_staff.permissions.add(add_project)
+        project_owners_staff.permissions.add(change_project)
+        project_owners_staff.permissions.add(delete_project)
+
+        owners = User.objects.filter(Q(username__contains ='Nastya_user') |
+                                     Q(username__contains ='Dmitry_user') |
+                                     Q(username__contains ='Andrey_user'))
+        for owner in owners:
+            owner.groups.add(project_owners_staff)
+            owner.save()
+
+        devops = User.objects.filter(username__contains='bot')
+        for devop in devops:
+            devop.groups.add(devops_staff)
+            devop.save()
+
