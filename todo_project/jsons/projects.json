@@ -1,0 +1,91 @@
+[
+  {
+    "pk": "28e09264-e0f9-4202-8884-ff0f1c7f0aeb",
+    "is_active": true,
+    "name": "Happiness",
+    "link": "http://localhost:3000/3",
+    "authors":[
+      "8bbbe242-1ae2-4fa6-ba39-8f7bf495c7b7"]
+
+  },
+  {
+    "pk": "558c00ee-6212-4bb7-a772-dc2bc3c56aa1",
+    "is_active": true,
+    "name": "Western Agony",
+    "link": "http://localhost:3000/1",
+    "authors": [
+      "135529cf-854c-415d-847f-f3a8c61d1eb6",
+      "4c28bb1b-de84-4509-a009-baa471acf6ea",
+      "5d332df1-3030-422b-8d7c-69effcf3584c"
+    ]
+  },
+  {
+    "pk": "7b98658e-33df-405a-97ee-38253941221a",
+    "is_active": true,
+    "name": "Russian Force",
+    "link": "http://localhost:3000/2",
+    "authors": [
+      "5d332df1-3030-422b-8d7c-69effcf3584c"
+    ]
+  },
+  {
+    "pk": "7c0c65ef-68cd-4e69-9281-5ca4c81f4d25",
+    "is_active": true,
+    "name": "Silence of ducklings",
+    "link": "http://localhost:3000/4",
+    "authors": [
+      "8bbbe242-1ae2-4fa6-ba39-8f7bf495c7b7",
+      "c18c5f3a-2a61-4116-9d9b-47b494f66012",
+      "ef253aa3-4eb3-4b2e-a13a-9d4aeef9f532"
+    ]
+  },
+  {
+    "model": "todoapp.project",
+    "pk": "a6ecd270-3437-45c0-bf06-0f73857c74c2",
+    "is_active": true,
+    "name": "Justucy part2",
+    "link": "http://localhost:3000/113",
+    "authors": [
+      "c181ba17-3f09-4e71-b628-24cc6f28c667"
+    ]
+  },
+  {
+    "pk": "ae871152-a6cc-41a9-98d5-65031d17a126",
+    "is_active": true,
+    "name": "Eastern answer",
+    "link": "http://localhost:3000/111",
+    "authors": [
+      "3d7dd0f9-14a1-4377-93d4-d46732957a50",
+      "c18c5f3a-2a61-4116-9d9b-47b494f66012",
+      "d701f9b0-0a80-4be6-b25d-34b90a519396",
+      "ea3e955d-0811-4664-bc97-0f62790e23c8"
+    ]
+  },
+  {
+    "pk": "e7341810-8e94-4091-a11e-8da5d35ac91f",
+    "is_active": true,
+    "name": "Justucy",
+    "link": "http://localhost:3000/112",
+    "authors": [
+      "4c28bb1b-de84-4509-a009-baa471acf6ea"
+    ]
+  },
+  {
+    "pk": "fa7d33da-a2e8-4bdd-9171-416f95e038d0",
+    "is_active": true,
+    "name": "Western Agony part2",
+    "link": "http://localhost:3000/1123",
+    "authors": [
+      "135529cf-854c-415d-847f-f3a8c61d1eb6"
+    ]
+  },
+  {
+    "pk": "fd066813-cd93-4cbf-9aac-208da2bf9123",
+    "is_active": true,
+    "name": "Книга Настя и Андрей",
+    "link": "http://localhost:3000/1111",
+    "authors": [
+      "4c28bb1b-de84-4509-a009-baa471acf6ea"
+    ]
+  }
+]

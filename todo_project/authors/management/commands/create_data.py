@@ -44,8 +44,22 @@ class Command(BaseCommand):
         Book.objects.all().delete()
         for book in books:
             instance = Author.objects.filter(pk=book['authors'])[0]
-            uuid_book = uuid.UUID(book['pk'])
-            new_book = Book(uid=uuid_book, name=book['name'])
+            uuid_item = uuid.UUID(book['pk'])
+            new_book = Book(uid=uuid_item, name=book['name'])
             new_book.save()
             new_book.authors.add(instance)
 
+        projects = load_from_json('projects')
+        Project.objects.all().delete()
+        for project in projects:
+            # for number in enumerate(len(project['authors'])):
+            print(len(project['authors']))
+            instance = Author.objects.filter(pk=project['authors'])[0]
+            print(instance)
+            uuid_item = uuid.UUID(project['pk'])
+            print(uuid_item)
+            new_project = Project(uid=uuid_item,
+                                  name=project['name'],
+                                  link=project['link'])
+            new_project.save()
+            # new_project.authors.add(instance)
