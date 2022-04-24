@@ -19,7 +19,7 @@ services:
 #      - db
   backend:
     build:
-      context: DjangoRESTframework
+      context: .
     ports:
       - 8080:8080
     command: bash -c "
