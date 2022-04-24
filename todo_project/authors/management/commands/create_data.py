@@ -1,5 +1,6 @@
 import os
 import uuid
+from pathlib import Path
 
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User, Group, Permission
@@ -9,9 +10,10 @@ from rest_framework.utils import json
 from authors.models import Author, Book
 from todoapp.models import Project, ToDo
 
-
-JSON_PATH = "/home/andrey/Project_Pycharm/DeployDjango/" \
-            "2_step_2_for_test_django_and_migrations/DjangoRESTframework/todo_project/jsons"
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = Path(CURRENT_DIR).parent.parent
+JSON_PATH = os.path.dirname(os.path.abspath(PARENT_DIR)) + '/jsons'
+# JSON_PATH = "2_step_2_for_test_django_and_migrations/DjangoRESTframework/todo_project/jsons"
 
 
 def load_from_json(file_nm):
