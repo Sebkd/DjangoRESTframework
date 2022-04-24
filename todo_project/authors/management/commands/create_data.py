@@ -92,7 +92,7 @@ class Command(BaseCommand):
         Group.objects.all().delete()
         #Группы
         #Devops
-        devops_staff = Group.objects.create(name='Devops')
+        devops_staff = Group.objects.create(name='Разработчики')
 
         #права devops: разработчики имеют все права на модель ToDo,
         # могут просматривать модели Project и Author;
@@ -101,7 +101,7 @@ class Command(BaseCommand):
         devops_staff.permissions.add(delete_todo)
 
         #Projectowners
-        project_owners_staff = Group.objects.create(name='Projectowners')
+        project_owners_staff = Group.objects.create(name='Владельцы проектов')
 
         #права Projectowners: владельцы проектов имеют права на просмотр модели
         # Author и все права на модель Project и ToDo
