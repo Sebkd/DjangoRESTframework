@@ -19,7 +19,7 @@ services:
 #      - db
   backend:
     build:
-      context: .
+      context: 2_step_2 for test django and migrations
     ports:
       - 8080:8080
     command: bash -c "

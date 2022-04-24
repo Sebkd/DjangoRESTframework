@@ -9,7 +9,9 @@ from rest_framework.utils import json
 from authors.models import Author, Book
 from todoapp.models import Project, ToDo
 
-JSON_PATH = "/home/andrey/Project_Pycharm/DjangoRESTframework/todo_project/jsons/"
+
+JSON_PATH = "/home/andrey/Project_Pycharm/DeployDjango/" \
+            "2_step_2_for_test_django_and_migrations/DjangoRESTframework/todo_project/jsons"
 
 
 def load_from_json(file_nm):
