@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django_filters',  # нету в методичке
     'rest_framework.authtoken',
     'drf_yasg',
-    'graphene_django',
+    # 'graphene_django',
 
 ]
 
@@ -162,6 +162,6 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
 }
 
-GRAPHENE = {
-    'SCHEMA': "todoproject.schema.schema"
-}
+# GRAPHENE = {
+#     'SCHEMA': "todoproject.schema.schema"
+# }
