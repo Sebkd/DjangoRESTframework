@@ -1,4 +1,5 @@
 version: '3.7'
+
 services:
   db:
     image: postgres:14.2
@@ -10,7 +11,7 @@ services:
       POSTGRES_USER: adm
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: todo_project
-#  adminer:
+#  adminer: step1
 #    image: adminer:4.8.1-standalone
 #    restart: always
 #    ports:
@@ -22,11 +23,17 @@ services:
       context: .
     ports:
       - 8080:8080
+#    command: bash -c " step2
+#      ./wait-for-postgres.sh db
+#      && python manage.py migrate
+#      && python manage.py create_data
+#      && python manage.py runserver 0.0.0.0:8080
+#      "
     command: bash -c "
       ./wait-for-postgres.sh db
       && python manage.py migrate
       && python manage.py create_data
-      && python manage.py runserver 0.0.0.0:8080
+      && gunicorn todoproject.wsgi -b 0.0.0.0:8080
       "
     depends_on:
       - db

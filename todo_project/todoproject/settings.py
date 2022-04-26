@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django_filters',  # нету в методичке
     'rest_framework.authtoken',
     'drf_yasg',
-    'graphene_django',
+    # 'graphene_django',
 
 ]
 
@@ -93,8 +93,14 @@ WSGI_APPLICATION = 'todoproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'todo_project',
+        'USER': 'adm',
+        'PASSWORD': '123',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
@@ -156,12 +162,12 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
 
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ],
 
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
 }
 
-GRAPHENE = {
-    'SCHEMA': "todoproject.schema.schema"
-}
+# GRAPHENE = {
+#     'SCHEMA': "todoproject.schema.schema"
+# }
