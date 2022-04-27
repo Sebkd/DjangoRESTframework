@@ -1,0 +1,32 @@
+[
+  {
+    "pk": "04d3eacf-09ce-44e7-b462-a8e1b1ec8d5c",
+    "name": "Western Agony book",
+    "authors": "aa6f7026-679e-4ab6-a39e-59b15583a30d"
+  },
+  {
+    "pk": "171d6e5b-9c25-47d0-8268-9cc133d797d3",
+    "name": "Книга Дмитрий и Андрей",
+    "authors": "135529cf-854c-415d-847f-f3a8c61d1eb6"
+  },
+  {
+    "pk": "324a774b-b309-428f-9861-ea6a28d27d3f",
+    "name": "Книга Андрей",
+    "authors": "135529cf-854c-415d-847f-f3a8c61d1eb6"
+  },
+  {
+    "pk": "47f04cfc-ad6d-4b35-bfb5-97fff8bae246",
+    "name": "Книга Дмитрий",
+    "authors": "4c28bb1b-de84-4509-a009-baa471acf6ea"
+  },
+  {
+    "pk": "b13906ba-944a-483c-b570-745eb8cccca3",
+    "name": "Книга Настя",
+    "authors": "5d332df1-3030-422b-8d7c-69effcf3584c"
+  },
+  {
+    "pk": "c0ae869b-8f80-4644-bb7c-2fc245bd428d",
+    "name": "Книга Настя и Андрей",
+    "authors": "135529cf-854c-415d-847f-f3a8c61d1eb6"
+  }
+]
