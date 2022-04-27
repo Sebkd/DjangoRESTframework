@@ -41,7 +41,7 @@ class UserSimpleSerializers(ModelSerializer):  # work model
         fields = ['username', ]
 
 
-class AuthorUserModelSerializer(ModelSerializer):  # work model for Author
+class AuthorUserModelSerializer(HyperlinkedModelSerializer):  # work model for Author ModelSerializer
     username = UserSerializers()
 
     class Meta:
