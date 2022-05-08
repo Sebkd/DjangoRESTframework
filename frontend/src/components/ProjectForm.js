@@ -1,9 +1,7 @@
 import React from "react";
-import LoginForm from "./Auth";
 
 
 class ProjectForm extends React.Component {
-    //name, authors, link
     constructor(props) {
         super(props);
         this.state = {name: '', authors: props.authors.uid, link: '',};
@@ -42,8 +40,6 @@ class ProjectForm extends React.Component {
                         {this.props.authors.map((item) => <option
                             value={item.uid}>{item.username}</option>)}
                     </select>
-                    {/*<input type="number" className="form-control" name="author"*/}
-                    {/*       value={this.state.author} onChange={(event) => this.handleChange(event)}/>*/}
                 </div>
 
                 <div className="form-group">

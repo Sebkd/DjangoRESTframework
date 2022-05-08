@@ -2,7 +2,6 @@ import React from "react";
 
 
 class ToDoForm extends React.Component {
-    //project, author, content
     constructor(props) {
         super(props);
         this.state = {projects: props.authors.uid, authors: props.authors.uid, content: '',};

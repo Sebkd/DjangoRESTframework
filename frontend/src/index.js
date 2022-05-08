@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Router, Routes} from "react-router-dom";
-
-import Menu_App from "./Menu_app";
 
 
 ReactDOM.render(

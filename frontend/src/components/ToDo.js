@@ -20,7 +20,6 @@ const TodoList = ({todos, deleteToDo}) => {
         <div>
             <table>
                 <tr>
-                    {/*<th>UID</th>*/}
                     <th>PROJECT</th>
                     <th>AUTHOR</th>
                     <th>CONTENT</th>

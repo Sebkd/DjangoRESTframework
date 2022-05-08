@@ -20,28 +20,18 @@ class LoginForm extends React.Component {
         this.props.get_token(this.state.username, this.state.password)
         console.log(this.state.username + ' ' + this.state.password) // чтобы при Submit форма не отправлялась
         event.preventDefault() // чтобы при Submit форма не отправлялась
-        // console.log(this.state.login + ' ' + this.state.password) // чтобы при Submit форма не отправлялась
 
     }
 
     render() {
         return (
-            // <form onSubmit={(event) => this.handleSubmit(event)}>
-            //     <input type="text" name="login" placeholder="login"
-            //            value={this.state.login} onChange={(event) => this.handleChange(event)}/>
-            //     <input type="password" name="password" placeholder="password"
-            //            value={this.state.password} onChange={(event) => this.handleChange(event)}/>
-            //     <input type="submit" value="Login"/>
-            // </form>
 
             <Form
-                // onSubmit={(event) => this.handleSubmit(event)}
                 name="basic"
                 labelCol={{span: 8}}
                 wrapperCol={{span: 16}}
                 initialValues={{remember: true}}
                 onFinish={(event) => this.handleSubmit(event)}
-                // onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item
@@ -67,10 +57,6 @@ class LoginForm extends React.Component {
                         onChange={(event) => this.handleChange(event)}
                     />
                 </Form.Item>
-
-                {/*<Form.Item name="remember" valuePropName="checked" wrapperCol={{offset: 8, span: 16}}>*/}
-                {/*    <Checkbox>Remember me</Checkbox>*/}
-                {/*</Form.Item>*/}
 
                 <Form.Item wrapperCol={{offset: 8, span: 16}}>
                     <Button type="primary" htmlType="submit">

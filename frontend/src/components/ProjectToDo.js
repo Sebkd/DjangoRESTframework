@@ -4,7 +4,6 @@ import {useParams} from 'react-router-dom'
 const TodoItem = ({todo}) => {
     return (
         <tr>
-            {/*<td>{todo.url}</td>*/}
             <td>{todo.project}</td>
             <td>{todo.author}</td>
             <td>{todo.content}</td>
@@ -21,7 +20,6 @@ const ProjectToDoList = ({items, projects_list}) => {
     return (
         <table>
             <tr>
-                {/*<th>ID</th>*/}
                 <th>PROJECT</th>
                 <th>AUTHOR</th>
                 <th>CONTENT</th>

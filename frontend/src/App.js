@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 import React from "react";
 
@@ -7,14 +6,13 @@ import {
     DesktopOutlined,
     PieChartOutlined,
     FileOutlined,
-    TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-import {BrowserRouter, Link, Route, Router, Routes} from "react-router-dom";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 
 import axios from 'axios'
 import Cookies from 'universal-cookie'
-import {HashRouter, useLocation, Redirect,} from 'react-router-dom'
+
 
 import AuthorList from "./components/Author";
 import BookList from "./components/Book"
@@ -25,8 +23,6 @@ import ProjectToDoList from "./components/ProjectToDo";
 import LoginForm from "./components/Auth";
 import ProjectForm from "./components/ProjectForm"
 import ToDoForm from "./components/ToDoForm";
-// import project from "./components/Project";
-// import toDo from "./components/ToDo";
 
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -169,7 +165,7 @@ class App extends React.Component {
         })
     }
 
-    createProject(name, author, link){
+    createProject(name, author, link) {
         const headers = this.get_headers()
         const data = {name: name, authors: [author,], link: link}
         axios.post(`http://127.0.0.1:8000/api/project/`, data, {headers})
@@ -178,9 +174,8 @@ class App extends React.Component {
                 const author = this.state.authors.filter((item) => item.uid === newProject.author)
                 newProject.author = author
                 this.state.projects.push(newProject)
-                // this.setState({projects: [...this.state.projects, newProject]})
             }).catch(error => {
-                console.log(error)
+            console.log(error)
         })
     }
 
@@ -194,7 +189,7 @@ class App extends React.Component {
         })
     }
 
-    createToDo(project, author, content){
+    createToDo(project, author, content) {
         const headers = this.get_headers()
         const obj = this.state.projects.filter((item) => item.uid === project)
         console.log(obj)
@@ -207,9 +202,8 @@ class App extends React.Component {
                 const project = this.state.projects.filter((item) => item.uid === newToDo.project)
                 newToDo.project = project
                 this.state.todos.push(newToDo)
-                // this.setState({todos: [...this.state.todos, newToDo]})
             }).catch(error => {
-                console.log(error)
+            console.log(error)
         })
     }
 
@@ -238,15 +232,6 @@ class App extends React.Component {
 
                             </Menu.Item>
 
-                            {/*<SubMenu key="sub1" icon={<UserOutlined/>} title="User">*/}
-                            {/*    <Menu.Item key="3">Tom</Menu.Item>*/}
-                            {/*    <Menu.Item key="4">Bill</Menu.Item>*/}
-                            {/*    <Menu.Item key="5">Alex</Menu.Item>*/}
-                            {/*</SubMenu>*/}
-                            {/*<SubMenu key="sub2" icon={<TeamOutlined/>} title="Team">*/}
-                            {/*    <Menu.Item key="6">Team 1</Menu.Item>*/}
-                            {/*    <Menu.Item key="8">Team 2</Menu.Item>*/}
-                            {/*</SubMenu>*/}
                             <Menu.Item key="9" icon={<FileOutlined/>}>
                                 <Link to={'/todos'}>ToDo</Link>
                             </Menu.Item>
@@ -270,10 +255,6 @@ class App extends React.Component {
                                     <Route path='*' element={<NotFound404/>}/>
 
                                     <Route path='/' element={<AuthorList authors={this.state.authors}/>}/>
-                                    {/* в старом варианте выглядело так  */}
-                                    {/*<Route exact path='/' component={() => <AuthorList authors={this.state.authors}/>}/>*/}
-                                    {/*и не оборачивали в Routes*/}
-                                    {/*в новом оборачиваем в Routes маршруты Route и вместо component () => пишем просто element*/}
                                     <Route path='/books' element={<BookList books={this.state.books}/>}/>
                                     <Route path='/projects' element={<ProjectList projects={this.state.projects}
                                                                                   deleteProject={(uid, url_prj) => this.deleteProject(uid, url_prj)}/>}/>
@@ -283,17 +264,17 @@ class App extends React.Component {
                                     <Route path='/author/:username'
                                            element={<AuthorBookList items={this.state.books}/>}/>
 
-                                    <Route path="/project/:name" element={<ProjectToDoList items={this.state.todos} projects_list={this.state.projects}/>}/>
+                                    <Route path="/project/:name" element={<ProjectToDoList items={this.state.todos}
+                                                                                           projects_list={this.state.projects}/>}/>
 
                                     <Route path='/login' element={<LoginForm
                                         get_token={(username, password) => this.get_token(username, password)}/>}/>
 
                                     <Route path='/projects/create' element={<ProjectForm authors={this.state.authors}
-                                        createProject={(name, author, link) => this.createProject(name, author, link)} />}/>
-                                        {/*createProject={(name, author, link) => this.createProject(name, author, link)}*/}
+                                                                                         createProject={(name, author, link) => this.createProject(name, author, link)}/>}/>
                                     <Route path='/todos/create' element={<ToDoForm projects={this.state.projects}
                                                                                    authors={this.state.authors}
-                                        createToDo={(project, author, content) => this.createToDo(project, author, content)} />}/>
+                                                                                   createToDo={(project, author, content) => this.createToDo(project, author, content)}/>}/>
                                 </Routes>
                             </div>
 
